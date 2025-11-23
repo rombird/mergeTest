@@ -1,8 +1,16 @@
 package com.example.demo.config;
 
+<<<<<<< HEAD
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+=======
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import com.zaxxer.hikari.HikariDataSource;
+>>>>>>> origin/대장
 
 @Configuration
 public class DataSourceConfig {
