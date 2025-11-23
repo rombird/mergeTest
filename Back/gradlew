@@ -115,10 +115,14 @@ case "$( uname )" in                #(
 esac
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 CLASSPATH="\\\"\\\""
 =======
 CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
 >>>>>>> origin/대장
+=======
+CLASSPATH="\\\"\\\""
+>>>>>>> origin/막내
 
 
 # Determine the Java command to use to start the JVM.
@@ -218,10 +222,14 @@ set -- \
         "-Dorg.gradle.appname=$APP_BASE_NAME" \
         -classpath "$CLASSPATH" \
 <<<<<<< HEAD
+<<<<<<< HEAD
         -jar "$APP_HOME/gradle/wrapper/gradle-wrapper.jar" \
 =======
         org.gradle.wrapper.GradleWrapperMain \
 >>>>>>> origin/대장
+=======
+        -jar "$APP_HOME/gradle/wrapper/gradle-wrapper.jar" \
+>>>>>>> origin/막내
         "$@"
 
 # Stop when "xargs" is not available.

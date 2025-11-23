@@ -13,12 +13,21 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+<<<<<<< HEAD
 @Builder
 @Entity
+=======
+@Entity
+@Builder
+>>>>>>> origin/막내
 public class Signature {
     @Id
     @Column(name="signKey")
     private byte[] keyBytes;
     @Column(name="createAt")
     private LocalDate createAt;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/막내

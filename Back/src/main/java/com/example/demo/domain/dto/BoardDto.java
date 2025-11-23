@@ -2,6 +2,7 @@ package com.example.demo.domain.dto;
 
 
 import com.example.demo.domain.entity.BoardEntity;
+<<<<<<< HEAD
 import com.example.demo.domain.entity.BoardFileEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
@@ -14,10 +15,18 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+=======
+import lombok.*;
+
+import java.time.LocalDateTime;
+
+@Data
+>>>>>>> origin/막내
 @NoArgsConstructor
 @AllArgsConstructor
 public class BoardDto {
     private Long id;
+<<<<<<< HEAD
     private String boardWriter;
     private String boardPass;
     private String boardTitle;
@@ -52,12 +61,27 @@ public class BoardDto {
         boardDto.setId(boardEntity.getId());
         boardDto.setBoardWriter(boardEntity.getBoardWriter());
         boardDto.setBoardPass(boardEntity.getBoardPass());
+=======
+//    private String boardWriter;
+//    private String boardPass;
+    private String boardTitle;
+    private String boardContents;
+    private int boardHits;
+    private LocalDateTime boardCreateTime;
+    private LocalDateTime boardUpdateTime;
+
+    public static BoardDto toBoardDto(BoardEntity boardEntity){
+        BoardDto boardDto = new BoardDto();
+
+        boardDto.setId(boardEntity.getId());
+>>>>>>> origin/막내
         boardDto.setBoardContents(boardEntity.getBoardContents());
         boardDto.setBoardHits(boardEntity.getBoardHits());
         boardDto.setBoardTitle(boardEntity.getBoardTitle());
         boardDto.setBoardCreateTime(boardEntity.getCreatedTime());
         boardDto.setBoardUpdateTime(boardEntity.getUpdatedTime());
 
+<<<<<<< HEAD
         // 첨부파일 유무 체크
         if (boardEntity.getFileAttached() == 0) {
             boardDto.setFileAttached(0);
@@ -76,6 +100,8 @@ public class BoardDto {
             boardDto.setBoardFileDtoList(fileDtoList);
         }
 
+=======
+>>>>>>> origin/막내
         return boardDto;
     }
 

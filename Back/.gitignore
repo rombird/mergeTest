@@ -36,7 +36,10 @@ out/
 ### VS Code ###
 .vscode/
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 # src/main/resources/application-dev.properties
 >>>>>>> origin/대장
+=======
+>>>>>>> origin/막내

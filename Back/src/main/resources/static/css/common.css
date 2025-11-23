@@ -1,21 +1,37 @@
 @font-face {
             font-family: 'nexonBold';
+<<<<<<< HEAD
             src: url('/font/NEXONLv1GothicBold.ttf');
+=======
+            src: url('./font/NEXONLv1GothicBold.ttf');
+>>>>>>> origin/막내
             font-style: normal;
         }
         @font-face {
             font-family: 'nexonLight';
+<<<<<<< HEAD
             src: url('/font/NEXONLv1GothicLight.ttf');
+=======
+            src: url('./font/NEXONLv1GothicLight.ttf');
+>>>>>>> origin/막내
             font-style: normal;
         }
         @font-face {
             font-family: 'nexonRegular';
+<<<<<<< HEAD
             src: url('/font/NEXONLv1GothicRegular.ttf');
+=======
+            src: url('./font/NEXONLv1GothicRegular.ttf');
+>>>>>>> origin/막내
             font-style: normal;
         }
         @font-face {
             font-family: 'logo';
+<<<<<<< HEAD
             src: url('/font/BitcountGridDouble-SemiBold.ttf');
+=======
+            src: url('./font/BitcountGridDouble-SemiBold.ttf');
+>>>>>>> origin/막내
             font-style: normal;
         }
 * {

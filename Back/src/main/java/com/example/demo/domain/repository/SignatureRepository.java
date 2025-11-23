@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SignatureRepository extends JpaRepository<Signature,Byte> {
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/막내

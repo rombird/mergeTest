@@ -1,7 +1,10 @@
 package com.example.demo.domain.entity;
 
 
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonFormat;
+=======
+>>>>>>> origin/막내
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -22,12 +25,18 @@ import java.time.LocalDateTime;
 @Getter
 public class BaseEntity {
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/막내
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime createdTime;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/막내
     @UpdateTimestamp
     @Column(insertable = false)
     private LocalDateTime updatedTime;

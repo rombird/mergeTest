@@ -1,15 +1,21 @@
 package com.example.demo.domain.entity;
 
 import com.example.demo.domain.dto.BoardDto;
+<<<<<<< HEAD
 import com.example.demo.domain.dto.CommentDto;
+=======
+>>>>>>> origin/막내
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
+=======
+>>>>>>> origin/막내
 // Board DB의 테이블 역할을 하는 클래스
 @Entity
 @Data
@@ -23,12 +29,15 @@ public class BoardEntity extends BaseEntity{
     private Long id;
 
     @Column(nullable = false)
+<<<<<<< HEAD
     private String boardWriter;
 
     @Column(nullable = false)
     private String boardPass;
 
     @Column(nullable = false)
+=======
+>>>>>>> origin/막내
     private String boardTitle;
 
     @Column(nullable = false, length = 500)
@@ -37,6 +46,7 @@ public class BoardEntity extends BaseEntity{
     @Column
     private int boardHits;
 
+<<<<<<< HEAD
     @Column
     private Integer fileAttached; // 1 or 0
 
@@ -104,4 +114,15 @@ public class BoardEntity extends BaseEntity{
         this.fileAttached = fileAttached;
     }
 
+=======
+    public static BoardEntity toSaveEntity(BoardDto boardDto){
+        BoardEntity boardEntity = new BoardEntity();
+
+        boardEntity.setBoardHits(0);
+        boardEntity.setBoardTitle(boardDto.getBoardTitle());
+        boardEntity.setBoardContents(boardDto.getBoardContents());
+
+        return boardEntity;
+    }
+>>>>>>> origin/막내
 }

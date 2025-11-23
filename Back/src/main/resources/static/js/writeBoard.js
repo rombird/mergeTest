@@ -7,7 +7,11 @@ document.addEventListener("DOMContentLoaded", function() {
     // 파일 확장자 제한
     const allowedExtensions = ['xlsx', 'pptx', 'txt', 'pdf', 'jpg', 'jpeg', 'png', 'hwp'];
     const maxCount = 5;
+<<<<<<< HEAD
     const maxSize = 20 * 1024 * 1024; // 6MB
+=======
+    const maxSize = 6 * 1024 * 1024; // 6MB
+>>>>>>> origin/막내
 
 
     // 드래그 시 시각효과

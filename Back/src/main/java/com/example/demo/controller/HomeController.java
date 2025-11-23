@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/막내
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.support.SimpleTriggerContext;
@@ -26,6 +29,7 @@ public class HomeController {
         return "main";
     }
 
+<<<<<<< HEAD
 
 =======
 import lombok.extern.slf4j.Slf4j;
@@ -43,4 +47,6 @@ public class HomeController {
         return "home";
     }
 >>>>>>> origin/대장
+=======
+>>>>>>> origin/막내
 }
