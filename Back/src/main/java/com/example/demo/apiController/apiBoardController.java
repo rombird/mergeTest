@@ -255,36 +255,45 @@ public class apiBoardController {
     // 게시글 수정
     // ################################################################
 
-    // Put api/board/{id}
+    // Put api/board/update/{id}
     @Operation(summary = "게시글 수정 처리", description = "수정된 게시글 정보를 받아 DB에 반영하고, 수정된 DTO를 JSON으로 반환")
     @PutMapping("/update/{id}")
     public ResponseEntity<BoardDto> updateBoard(
             @PathVariable Long id,
             @ModelAttribute BoardDto boardDto,  // ModelAttribute로 받아서 텍스트 필드와 boardDto내의 MultipartFile 필드를 받도록 준비
-            @RequestParam(value = "uploadFiles", required = false) List<MultipartFile> uploadFiles, // 2. 새 파일들
-            @RequestParam(value = "deleteFileIds", required = false) List<Long> deleteFileIds   // 삭제할 파일들
+            @RequestParam(value = "uploadFiles", required = false) List<MultipartFile> newFiles, // 2. 새 파일들 클라이언트에서 uploadFiles로 보냄
+            @RequestParam(value = "deleteFileIds", required = false) List<Long> deleteFileIds   // 삭제할 파일들 클라이언트에서 deleteFileIds로 보냄
     ){
         log.info("Put /api/board/{id}... 게시글 수정 apiBoardController", id);
 
-        if(boardDto.getId() == null){
-            boardDto.setId(id);
-        }
+        // Dto에 Id 설정(경로 변수 사용)
+        boardDto.setId(id);
 
-//        // 경로 변수 id와 Dto의 id가 일치하도록 강제하거나 확인
-//        if(boardDto.getId() == null || !boardDto.getId().equals(id)){
-//            log.warn("ID 불일치: URL ID({})와 DTO ID({})", id, boardDto.getId());
-//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//        }
+        // 비밀번호가 필수로 입력되므로, Dto에서 비밀번호 필드를 가져와야 함
+        String inputPassword = boardDto.getBoardPass();
+        if (inputPassword == null || inputPassword.isEmpty()){
+            log.warn("비밀번호 누락: 수정을 위한 비밀번호가 입력되지 않았습니다.");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();  // 401 오류(권한 없음) 반환
+        }
 
         try{
             // BoardService에 텍스트, 새 파일, 삭제할 ID 목록을 전달
-            BoardDto updateBoard = boardService.update(boardDto, uploadFiles, deleteFileIds);
+            BoardDto updateBoard = boardService.update(boardDto, newFiles, deleteFileIds);
 
             log.info("게시글 수정 완료, ID: ()", updateBoard.getId());
 
             // 수정된 DTO와 200 OK상태 반환
             return new ResponseEntity<>(updateBoard, HttpStatus.OK);
-        }catch (Exception e){
+        }catch (IllegalArgumentException e){
+            // 비밀번호 불일치 예외 처리
+            if(e.getMessage().contains("비밀번호")){
+                log.warn("게시글 수정 실패: 비밀번호 불일치 (ID: {})", id);
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();  // 401 반환
+            }
+            log.error("게시글 수정 중 오류 발생: {}", e.getMessage());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);    // 다른 유효성 오류
+
+        }catch(Exception e){
             log.error("게시글 수정 중 오류 발생: {}", e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

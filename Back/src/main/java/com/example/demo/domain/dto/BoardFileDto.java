@@ -15,6 +15,7 @@ public class BoardFileDto {
     private Long id;
     private String originalFilename;
     private String storedFilename;
+    private Long fileSize;
 
 
     // Entity -> Dto 변환 메서드
@@ -24,6 +25,7 @@ public class BoardFileDto {
         boardFileDto.setId(boardFileEntity.getId());
         boardFileDto.setOriginalFilename(boardFileEntity.getOriginalFilename());
         boardFileDto.setStoredFilename(boardFileEntity.getStoredFilename());
+        boardFileDto.setFileSize(boardFileEntity.getFileSize());
 
         return boardFileDto;
     }

@@ -1,9 +1,7 @@
 package com.example.demo.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
 
@@ -43,6 +41,8 @@ import org.springframework.boot.autoconfigure.web.WebProperties;
 @ToString
 @Setter
 @Table(name = "board_file_table")
+@NoArgsConstructor
+@AllArgsConstructor
 public class BoardFileEntity extends BaseEntity{
 
     @Id
@@ -55,6 +55,9 @@ public class BoardFileEntity extends BaseEntity{
     @Column(name = "stored_file_name")
     private String storedFilename;
 
+    @Column(name = "file_size") // 파일 크기
+    private Long fileSize;
+
     // N:1관계(board_file_table입장에서)
     @ManyToOne(fetch = FetchType.LAZY) // Eager -> 부모테이블 조회시 자식 테이블도 같이 다 조회, Lazy -> 부모테이블 조회 시 필요한 상황에만 호출
     @JoinColumn(name = "board_id")  // 만들어질 컬럼 이름
@@ -65,12 +68,15 @@ public class BoardFileEntity extends BaseEntity{
     public static BoardFileEntity toBoardFileEntity
                                                     (BoardEntity boardEntity,
                                                      String originalFilename,
-                                                    String storedFilename)
+                                                    String storedFilename,
+                                                    Long fileSize)
     {
         BoardFileEntity boardFileEntity = new BoardFileEntity();
         boardFileEntity.setOriginalFilename(originalFilename);
         boardFileEntity.setStoredFilename(storedFilename);
         boardFileEntity.setBoardEntity(boardEntity);
+        boardFileEntity.setFileSize(fileSize);
+
         return boardFileEntity;
     }
 
