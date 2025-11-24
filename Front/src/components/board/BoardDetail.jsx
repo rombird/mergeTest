@@ -3,12 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import api from '../../api/axiosConfig';
 
-
-<<<<<<< HEAD
 import "../../css/boardDetail.css";
-=======
-import "../../css/boardDetail.css"
->>>>>>> dev
+
 
 const BoardDetail = () => {
     const { id } = useParams(); // URL에서 게시글 ID (예: 5) 가져오기
