@@ -44,7 +44,6 @@ public class UserDto {
 		return User.builder()
 				.username(this.username)
 				.password(this.password)
-                .isLock(false)
                 .isSocial(false)
                 .name(this.name)
                 .email(this.email)

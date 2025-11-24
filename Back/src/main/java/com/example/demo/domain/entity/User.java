@@ -25,9 +25,6 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password; // 비밀번호
 
-    @Column(name = "is_lock", nullable = false)
-    private Boolean isLock = false;
-
     @Column(name = "is_social", nullable = false)
     private Boolean isSocial = false;
 
@@ -48,6 +45,9 @@ public class User {
 
     @Column(name = "email")
     private String email;
+
+//    @Column(name = "is_lock", nullable = false)
+//    private Boolean isLock = false;
 
 //    @CreatedDate
 //    @Column(name = "created_date", updatable = false)

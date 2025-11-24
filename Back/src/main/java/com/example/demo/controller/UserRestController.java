@@ -65,7 +65,6 @@ public class UserRestController {
         User user = User.builder()
                 .username(userDto.getUsername())
                 .password( passwordEncoder.encode(userDto.getPassword()))
-                .isLock(false) // 기본적으로 잠금 해제 상태
                 .isSocial(false) // 일반 가입
                 .roleType(UserRoleType.USER)
                 .name(userDto.getName())
@@ -177,5 +176,4 @@ public class UserRestController {
     }
 
 
-    // endpoint 추가 : @Operation(summary="join", description = "JOIN")
 }

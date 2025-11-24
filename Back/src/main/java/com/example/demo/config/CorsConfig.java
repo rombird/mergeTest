@@ -16,4 +16,5 @@ public class CorsConfig implements WebMvcConfigurer {
                 .allowCredentials(true) // 쿠키/인증 정보 전송 허용
                 .maxAge(3600); // 캐시 기간 설정 (초 단위)
     }
+
 }
