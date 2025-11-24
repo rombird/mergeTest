@@ -32,7 +32,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-// Usersfjkdjfaklf
 @RestController
 @Slf4j
 @Tag(name="UserController", description="This is User Controller")
@@ -76,7 +75,10 @@ public class UserRestController {
         userRepository.save(user);
         return new ResponseEntity<String>("success", HttpStatus.OK);
     }
-    //Header 방식 (Authorization: Bearer <token>)
+
+
+
+    // Header 방식 (Authorization: Bearer <token>)
     // - XXS 공격에 매우취약 - LocalStorage / SessionStorage에 저장시 문제 발생
     // - 쿠키방식이 비교적 안전
 //    @Operation(summary="login", description = "LOGIN")

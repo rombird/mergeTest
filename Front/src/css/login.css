@@ -1,0 +1,99 @@
+body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.sign-in{
+    height: 800px;
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.sign-in>.sign-box{
+    margin:70px 0;
+    width:500px;
+    height:600px;
+}
+.original-sign{
+    height:500px;
+}
+.sign-in>main>h2{
+    text-align: center;
+    width: 500px;
+    height: 45px;
+    font-size: 40px;
+    font-family: "kopu";
+}
+
+.under-line{
+    height: 20px;
+    margin-bottom: 40px;
+    border-bottom: 5px solid #65A3FF;
+}
+
+.login{
+    width: 500px;
+}
+
+.login-group{
+    font-family:"kopu";
+    margin: 5px 0;
+    font-size:20px;
+    display:block;
+}
+.login-group>label{
+    text-align: left;
+    display:block;
+    margin:15px;
+}
+.login-group>label>img{
+    width:25px;
+    height:25px;
+}
+.login-group>input{
+    width: 480px;
+    height: 50px;
+    margin: 10px;
+    border: 1px solid #d8d8d8;
+    border-radius: 4px;
+}
+.submit-block{
+    height: 70px;
+    width:500px;
+    background-color: #65A3FF;
+    border:none;
+    color: white;
+    font-size: 20px;
+    margin-top: 50px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    font-family: "kopu";
+}
+
+.tx_btns{
+    display: flex;
+    justify-content: space-between;
+}
+
+.tx_btns>div{
+    display: flex;
+    gap: 10px;
+}
+
+.login-a-tag{
+    word-spacing: -1px;
+    font-family:"kopume";
+}
+
+.social{
+    margin-top:40px;
+    width:500px;
+}
+.social img{
+    width:60px;
+    height:60px;
+    margin:5px 30px; 
+}

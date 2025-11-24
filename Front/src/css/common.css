@@ -1,0 +1,315 @@
+@font-face {
+    font-family: "kopu";
+    src: url("../../public/fonts/KoPubWorld\ Dotum\ Bold.ttf");
+    font-style: normal;
+}
+@font-face {
+    font-family: 'kopume';
+    src: url('../../public/fonts/KoPubWorld\ Dotum\ Medium.ttf');
+    font-style: normal;
+}
+@font-face {
+    font-family: 'logo';
+    src: url('../../public/fonts/BitcountGridDouble-SemiBold.ttf');
+    font-style: normal;
+}
+
+* { box-sizing: border-box;}
+a,
+a:link,
+a:visited,
+a:hover,
+a:active,
+a:focus {
+    text-decoration: none;
+    color: black;
+}
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.layoutCenter{
+    width:1440px;
+    margin:0 auto;
+}
+
+ /* header width:1444px */
+ 
+.header{
+    height:140px;
+    /* border-bottom: 3px solid #3A6B71; */
+    box-shadow: 0 4px 3px #bbb;
+    background-color: white;
+    position:sticky; 
+    top: 0;
+    left:0;
+    width:100vw;
+    /* border:1px solid; */
+    z-index: 1000;
+    /* 맨 위에 붙어있게 하기 위해 top, left 0 필수 */
+ }
+
+ /* 로그인, 회원가입 -> topHeader */
+.topHeader{
+    height:45px; 
+    padding:15px 0;
+    margin:10px 0;
+}
+
+.topHeader>.topList>.topNav{
+    display:flex;
+    justify-content: flex-end;
+    width:400px;
+    margin-left:auto;
+}
+
+.topNavli>.login{
+    display:flex;
+    align-items: center;    
+    font-family:"kopu";
+    width:100px;
+    font-size:17px;
+    margin:0 5px;
+    height: 25px;
+}
+.login>.imgLogin{
+    width:25px;
+    height:25px;
+    margin:0 5px;
+}
+.topNavli>.join{
+    display:flex;
+    align-items: center;
+    gap:5px;
+    font-family:'kopu';
+    width:100px;
+    font-size:17px;
+    height: 25px;
+}
+.join>.imgJoin{
+    width:25px;
+    height:25px;
+    margin:0 5px;
+}
+.topNavli>.mypage{
+    margin-right:20px;
+    font-size:17px;
+    font-family:'kopu';
+}
+.mypage>.imgMypage{
+    width:25px;
+    height:23px;
+    margin:0 5px;
+}
+.topNavli>.logout{
+    margin-right:20px;
+    font-size:17px;
+    font-family:'kopu';
+    cursor: pointer;
+}
+.logout>.imgLogout{
+    width:25px;
+    height:23px;
+    margin:0 5px;
+}
+
+.navHeader{
+    height:90px;
+}
+
+.detailnav {
+    display: flex;
+    position:relative;
+    height:90px;
+    margin: 0 auto;
+    justify-content:space-between;
+    align-items: center;
+}
+.detailnav>.logo{
+    font-family:'logo';
+    color:#65A3FF;
+    font-size:50px;
+    width:250px;
+}
+.wrap{
+    display:flex;
+    position: absolute;
+    /* width: calc(100% - 600px); */
+    left: 270px;
+}
+.wrap>.mainNav {
+    display: flex;
+    justify-content: space-evenly;
+}
+.wrap>.mainNav>.mainList {
+    position: relative; 
+    text-align:center;
+    width: 200px;
+    height:90px;
+    margin:0 10px;
+}
+.mainMenu{
+    font-family:'kopu';
+}
+.wrap>.mainNav>.mainList>.listLine {
+    margin:0 10px;
+    line-height: 80px;
+    font-size: 20px;
+}
+.wrap>.mainNav>.mainList>.listLine::before{
+  content: "";
+  width: 100%;
+  height: 4px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transition: 0.5s transform ease;
+  transform: scaleX(0); 
+  transform-origin: left;
+  background: #65A3FF;
+}
+.wrap>.mainNav>.mainList>.listLine:hover::before{
+  transform: scaleX(1);
+}
+.wrap>.mainNav>.mainList>.listLine:hover>.mainMenu{
+    color:#65A3FF;
+    font-weight: bold;
+}
+
+/* mainNav 호버하면 전체 서브메뉴 나옴 */
+.wrap>.mainNav>.mainList:hover .subNav {
+    display: block;
+}
+
+.wrap>.mainNav>.mainList:nth-child(1){
+    /* margin-left:30px; */
+}
+
+.wrap>.mainNav>.mainList>.subNav {
+    width:100%;
+    height:200px;
+    position: absolute;
+    top: 100%;
+    /* top:100px 원래 코드 */
+    left: 0;
+    background-color: white;
+    /* opacity:0; */
+    display: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 0;
+}
+.wrap>.mainNav>.mainList>.subNav>.subList{
+    /* border:1px solid; */
+    font-size:16px;
+    height:63px;
+}
+.wrap>.mainNav>.mainList>.subNav>.subList>a{
+    display:flex;
+    height: 100%; 
+    align-items: center;
+    padding:0 20px;
+    /* line-height:60px; */
+    justify-content: center;
+    font-family:'kopu';
+}
+.chatbotBtn{
+    border:none;
+    background: transparent;;
+    outline: none;
+    box-shadow: none;
+}
+.chatbot{
+    margin:15px 0;
+    padding:5px; 
+    width:58px;
+    height:55px;
+    background-color: none;
+}
+
+/* footer */
+footer{
+    background-color:#cfcfcf13;
+    height:240px;
+}
+.mainFooter{
+    padding-top: 20px;
+    display:flex;
+    flex-direction: column
+    /* 여기서 마진 잡으면 X */
+}
+.footerLogo{
+    width:220px; 
+    margin-bottom:10px;
+}
+.footerLogo>h1{
+    font-family:'logo';
+    font-size:40px;
+    width:220px; 
+    /* width 변경 X */
+}
+.footerInfo{
+    display:flex;
+    text-align: left;
+}
+.footerInfoL{
+    margin-left:10px;
+    
+}
+.footerInfoL>p{
+    width:700px;
+    padding:0;
+    margin:0 90px 0 0;
+    font-family: "kopume";
+    font-size:13px;
+    margin:5px 0;
+}
+.footerInfoR{
+    margin-left:220px;
+    width:500px;
+    display:flex;
+}
+.footerInfoR>.site{
+    border-right:1px solid lightgray;
+    width:120px;
+    height:60px;
+    
+}
+.footerInfoR .footer-p{
+    padding:10px;
+    font-family: "kopume";
+    font-size:13px;
+}
+.footerInfoR li{
+    /* margin:10px; */
+}
+.footerInfoR>.related{
+    border-right:1px solid lightgray;
+    width:130px;
+    height:60px;
+}
+.footerInfoR>.related a{
+    padding:10px;
+}
+
+
+.footerInfoR>.personInfo{
+    width:210px;
+}
+.footerInfoR>.personInfo a{
+    padding:10px;
+}
+
+
+/* @media screen and (max-width: 1500px) {
+    .detailnav {
+        width: 98%;
+        padding: 0 1%;
+    }
+} */
