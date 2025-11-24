@@ -56,7 +56,8 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         String username = null;
 
         // 토큰 추가 : 요청 헤더나 쿠키에서 AccessToken과 Username을 가져옴
-        try {
+        try {       // JwtProperties.ACCESS_TOKEN_COOKIE_NAME : 액세스 토큰이 저장된 쿠키 이름(예: "access_token").
+                    // username 쿠키도 같이 읽어옵니다(토큰에서 바로 꺼내지 않고 쿠키 username도 활용).
             token = Arrays.stream(request.getCookies())
                     .filter(cookie -> cookie.getName().equals(JwtProperties.ACCESS_TOKEN_COOKIE_NAME)).findFirst()
                     .map(cookie -> cookie.getValue())

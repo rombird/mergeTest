@@ -1,0 +1,274 @@
+/* mainPage */
+main{
+    margin-top:50px;
+}
+.mainBanner{
+    height:270px;
+    padding-top: 30px;
+}
+/* 검색창 */
+/* 검색창 높이 226px */
+.mainSearch{
+    height:200px;
+    display:flex;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+}
+.searchBox{
+    padding:20px;
+}
+.searchBox>.search{
+    margin:15px;
+    width:1280px;
+    height:77px;
+    border-radius: 100px;
+    text-align: left;    
+    border: 3px solid #65A3FF;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, .18);
+    position: relative;
+    line-height:50px;
+}
+.searchBox>.search>select{
+    width: 130px;
+    border: none;
+    /* box-sizing: border-box; */
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    background-position: 100% 50%;
+    border: none;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    background-position: 100% 50%;
+    margin:10px 50px;
+    
+}
+.searchBox>.search>#title{
+    border:none;
+    width: 800px;
+    height: 40px;
+    font-size: 20px;
+    vertical-align: middle;
+    text-align: left;
+    padding: 3px 10px;
+    /* box-sizing: border-box; */
+}
+.searchBox>.search>#searchBtn{
+    /* position: absolute; */
+    /* top: 50%;
+    right: 15px; */
+    width: 60px;
+    height: 40px;
+    border: 0;
+    font-size:0;
+    vertical-align: middle;
+    /* opacity: .9; */
+    /* z-index: 5; */
+    background-color:white;
+    /* line-height:35px; */
+    margin-left:120px;
+    justify-content: center;
+    align-items: center;
+}
+.searchBox>.search>#searchBtn>img{
+    width:40px;
+    height:40px;
+    filter: opacity(0.5) drop-shadow(0 0 0 #fff);
+    display:block;
+    margin-left:50px;
+}
+.searchBox>.searchKey>.keyList{
+    display:flex;
+    /* border:1px solid; */
+    margin:25px 380px;
+}
+.searchBox>.searchKey>.keyList button{
+    border:none;
+    border-radius:50px;
+    margin:20px 5px;
+    padding:8px;
+    background-color:#65A3FF;
+    color:white;
+}
+
+/* subMain */
+.subMain {
+    /* border:1px solid; */
+}
+
+.subMain1 {
+    /* border:1px solid; */
+}
+
+/* bgImg */
+.bgImg{
+    /* border:1px solid; */
+    height:460px;
+    display:flex;
+}
+.bgImg>.title{
+    width:800px;
+    height:400px;
+    /* border:1px solid; */
+    margin:20px 0 30px 0;
+}
+.title>.small{
+    margin:50px 0 0 0;
+    font-size:30px;
+    padding-bottom:5px;
+    font-weight:400;
+}
+.title>.desc1{
+    display:block;
+    font-size:70px;
+    font-weight:400;
+}
+.title>.desc2{
+    display:block;
+    font-size:100px;
+    color:#65A3FF;
+    font-weight:500;
+}
+
+.bgImg>.daegu{
+    width:600px;
+    height:400px;
+    background-image: url("../../public/images/daegu_img.png");
+    margin:20px 30px 20px 10px;
+}
+
+
+/* issue */
+.issue{
+    /* height:500px; */
+    /* border:1px solid; */
+    border-radius:20px;
+    display:flex;
+    justify-content: center; 
+    align-items: center;
+    height:500px;
+}
+
+.service{
+    width: 500px;
+    height: 464px;
+    background-image: url("../../public/images/jobayo_bg.png");
+}
+
+.issueBoxes{
+    /* border:1px solid; */
+    margin:10px;
+    display:flex;
+    justify-content: center;
+    text-align: center;
+    height:400px;
+}
+
+/* .btn {
+  appearance: none;
+  background-color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-self: center;
+  margin: 20px;
+  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+  &:hover {
+    box-shadow: 0 0 40px 40px #3A6B71 inset;
+    color:white;
+    outline: 0;
+  }
+  &:focus {
+    color: #3A6B71;
+    outline: 0;
+  }
+} */
+
+#box{
+    background: rgba(247, 247, 247, 0.9);
+    width:260px;
+    height:380px;
+    border-radius:8px;
+    overflow:hidden;
+    margin:20px;
+    transition: all 0.3s cubic-bezier(0.42, 0.0, 0.58, 1.0);
+}
+#box:hover{
+    box-shadow:0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    transform:translateY(-20px);
+    background-color: #a0c4ff;
+}
+#box *{
+    /* padding:10px; */
+}
+
+
+#box img{
+    margin:20px 35px;
+    width:190px;
+    height:230px;
+    /* border:1px solid; */
+}
+#box dl{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    /* border: 1px solid red; */
+}
+#box dt{
+    width:100%;
+    height: auto;
+    /* max-height: 250px; */
+    /* border: 1px solid blue; */
+    font-size: 30px;
+    font-weight: 700;
+}
+#box dd{
+    height:auto; 
+    color: var(--color-gray2);
+    font-size: 14px;
+    margin:0 10px;
+    padding:0;
+    display: block;
+    unicode-bidi: isolate;
+}
+
+
+/* .issue>.issueEnd{
+    height:55px;
+    background-color:#3A6B71;
+    border:1px solid #f6f7f9;
+    border-bottom-left-radius:20px;
+    border-bottom-right-radius:20px;
+} */
+
+/* subMain2 */
+.trend{
+    height:700px;
+    /* border:1px solid; */
+}
+.trendContent{
+    /* border:1px solid; */
+}
+.trendTitle{
+    height:50px;
+    text-align: center;
+    margin:20px 70px 0 20px;
+}
+.trendBox{
+    display:flex;
+    justify-content: center; 
+    align-items: center;
+}
+.trendBox div{
+    margin:25px 20px 0 20px;
+    width:450px;
+    height:530px;
+    background-color:rgb(234, 234, 234);
+    border-radius: 10px;
+    box-shadow: 1px 2px 8px rgba(0, 0, 0, .15);
+    box-sizing: border-box;
+}

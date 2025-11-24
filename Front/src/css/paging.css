@@ -1,0 +1,111 @@
+.community{
+    margin-top:100px;
+}
+
+.community-title{
+    width:1000px;
+    border-bottom:1px solid #ddd;
+}
+.community-title h1{
+    font-family: "kopu";
+    margin-bottom:20px;
+}
+.community-title p{
+    font-family: "kopume";
+}
+
+/* 커뮤니티 게시글 */
+
+.community-box{
+    width:1000px;
+    margin-bottom:150px;
+}
+.community-box .community-filter{
+    border:none;
+    background: transparent;
+}
+.community-box input{
+    width:280px;
+    border-radius:8px;
+    border:1px solid #ddd;
+    margin:10px 0 10px 500px;
+}
+.article-box{
+    margin-bottom:50px;
+}
+.article{
+    border-bottom: 1px solid rgb(228, 232, 232);
+    padding: 24px 0px;
+    height:210px;
+    width:1000px;
+}
+.article-main{
+    /* border:1px solid; */
+}
+.article-main p{
+    text-align:left;
+}
+.article-main p:first-child{
+    font-size:16px;
+    font-weight: bold;
+    font-family: "kopu";
+}
+
+.article-response{
+    display:flex;
+    align-items: center;
+}
+.article-response>div{
+    margin:10px;
+}
+.response-img{
+    width:13px;
+    height:12px;
+}
+.community-bottom{
+    display:flex;
+    text-align: center;
+    align-items: center;
+    height: 50px;
+}
+.community-bottom>.paging{
+    width:400px;
+    margin-left:300px;
+}
+.community-bottom>.paging>.paging-container{
+    margin:10px 0;
+}
+.paging-container>.paging-first, .paging-last{
+    font-family: "kopu";
+    width:30px;
+    height:30px;
+}
+.paging-container>.paging-second{
+    font-family: "kopu";
+    width:30px;
+    height:30px;
+    margin:10px;
+}
+
+.community-bottom .board-create{
+    width:170px;
+    height:50px;
+    margin-left:100px;
+    color: white;
+    font-size: 20px;
+    background-color: #65A3FF;
+    border-radius: 4px;
+    font-family: "kopu";
+    border:none;
+}
+.disabled-page-number{
+    color:#ccc;
+    cursor : default;
+    padding:0 5px;
+    margin: 0 3px;
+}
+
+.page-numbers a {
+    color: #333;
+    cursor: pointer;
+}
