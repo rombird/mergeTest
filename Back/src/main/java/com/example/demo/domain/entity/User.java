@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Entity
 //@EntityListeners(AuditingEntityListener.class) // 엔티티가 저장되거나 업데이트될때 현재시간이나 로그인한 사용자 Id 자동 주입
 public class User {
-
+    // ENtitntt
     @Id
     @Column(name = "username", unique = true, nullable = false, updatable = false)
     private String username; // 아이디
