@@ -9,7 +9,10 @@ import com.example.demo.domain.repository.BoardRepository;
 import jakarta.persistence.Id;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+<<<<<<< HEAD
 import lombok.extern.slf4j.Slf4j;
+=======
+>>>>>>> parent of e8b61b6 (Delete Back directory)
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Safelist;
 import org.springframework.data.domain.Page;
@@ -45,7 +48,11 @@ import java.nio.file.Paths;
 // DTO -> Entity (Entity 클래스에서 할거임)
 // Entity -> DTO(DTO클래스에서 할거임)
 
+<<<<<<< HEAD
 @Slf4j
+=======
+
+>>>>>>> parent of e8b61b6 (Delete Back directory)
 @Service
 public class BoardService {
 
@@ -101,14 +108,21 @@ public class BoardService {
                 String storedFilename = System.currentTimeMillis() + "_" + originalFilename;
                 String savePath = fileDir + storedFilename;
 
+<<<<<<< HEAD
                 long fileSize = boardFile.getSize();
 
 
+=======
+>>>>>>> parent of e8b61b6 (Delete Back directory)
                 // 파일 시스템에 저장
                 boardFile.transferTo(new File(savePath));
 
                 // BoardFileEntity 생성 및 관계 설정
+<<<<<<< HEAD
                 BoardFileEntity boardFileEntity = BoardFileEntity.toBoardFileEntity(boardEntity, originalFilename, storedFilename, fileSize);
+=======
+                BoardFileEntity boardFileEntity = BoardFileEntity.toBoardFileEntity(boardEntity, originalFilename, storedFilename);
+>>>>>>> parent of e8b61b6 (Delete Back directory)
 
                 // BoardFileEntity 저장
                 boardFileRepository.save(boardFileEntity);
@@ -168,6 +182,7 @@ public class BoardService {
         BoardEntity boardEntity = boardRepository.findById(boardDto.getId())
                 .orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없습니다."));
 
+<<<<<<< HEAD
         // 2. 비밀번호 검증
         if (!boardEntity.getBoardPass().equals(boardDto.getBoardPass())){
             // 비밀번호가 틀릴 경우 예외 발생
@@ -177,12 +192,21 @@ public class BoardService {
         // 3. 텍스트 정보 업데이트 (제목, 내용)
         // 불필요한 HTML 태그 제거
         if (boardDto.getBoardContents() != null) {
+=======
+        // 2. 텍스트 정보 업데이트 (제목, 내용)
+        // 불필요한 HTML 태그 제거
+        if(boardDto.getBoardContents() != null) {
+>>>>>>> parent of e8b61b6 (Delete Back directory)
             String cleanText = Jsoup.clean(boardDto.getBoardContents(), Safelist.basicWithImages());
 
             boardEntity.updateText(boardDto.getBoardTitle(), cleanText);
         }
 
+<<<<<<< HEAD
         // 4. 파일 삭제 처리
+=======
+        // 3. 파일 삭제 처리
+>>>>>>> parent of e8b61b6 (Delete Back directory)
         if (deleteFileIds != null && !deleteFileIds.isEmpty()) {
             for (Long fileId : deleteFileIds) {
                 // DB에서 파일 정보 조회
@@ -193,9 +217,13 @@ public class BoardService {
                     String savePath = fileDir + fileEntity.getStoredFilename();
                     File file = new File(savePath);
                     if (file.exists()) {
+<<<<<<< HEAD
                         if(!file.delete()){
                             log.error("파일 삭제 실패: {}", savePath);
                         }
+=======
+                        file.delete();
+>>>>>>> parent of e8b61b6 (Delete Back directory)
                     }
                     // DB에서 파일 데이터 삭제
                     boardFileRepository.delete(fileEntity);
@@ -203,7 +231,11 @@ public class BoardService {
             }
         }
 
+<<<<<<< HEAD
         // 5. 새 파일 추가 처리
+=======
+        // 4. 새 파일 추가 처리
+>>>>>>> parent of e8b61b6 (Delete Back directory)
         if (newFiles != null && !newFiles.isEmpty()) {
             for (MultipartFile boardFile : newFiles) {
                 if (!boardFile.isEmpty()) {
@@ -211,16 +243,23 @@ public class BoardService {
                     String storedFilename = System.currentTimeMillis() + "_" + originalFilename;
                     String savePath = fileDir + storedFilename;
 
+<<<<<<< HEAD
                     Long fileSize = boardFile.getSize();    // 파일 크기 가져오기
 
                     boardFile.transferTo(new File(savePath));
 
                     BoardFileEntity boardFileEntity = BoardFileEntity.toBoardFileEntity(boardEntity, originalFilename, storedFilename, fileSize);
+=======
+                    boardFile.transferTo(new File(savePath));
+
+                    BoardFileEntity boardFileEntity = BoardFileEntity.toBoardFileEntity(boardEntity, originalFilename, storedFilename);
+>>>>>>> parent of e8b61b6 (Delete Back directory)
                     boardFileRepository.save(boardFileEntity);
                 }
             }
         }
 
+<<<<<<< HEAD
         // 6. 파일 첨부 여부(fileAttached) 상태 업데이트
         // 현재 이 게시글에 연결된 파일 개수 확인
         // 변경 사항이 즉시 DB에 반영되도록 saveAndFlush를 호출
@@ -232,12 +271,23 @@ public class BoardService {
         if(currentFileCount == 0){
             boardEntity.updateFileAttached(0);
         }else{
+=======
+        // 5. 파일 첨부 여부(fileAttached) 상태 업데이트
+        // 현재 이 게시글에 연결된 파일 개수 확인
+        List<BoardFileEntity> currentFiles = boardFileRepository.findAllByBoardEntityId(boardEntity.getId()); // Repository에 메서드 필요할 수 있음
+        if (currentFiles.isEmpty()) {
+            boardEntity.updateFileAttached(0);
+        } else {
+>>>>>>> parent of e8b61b6 (Delete Back directory)
             boardEntity.updateFileAttached(1);
         }
 
         return BoardDto.toBoardDto(boardEntity);
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of e8b61b6 (Delete Back directory)
     // 삭제 기능
     @Transactional
     public void delete(Long id){

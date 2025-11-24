@@ -2,6 +2,10 @@ package com.example.demo.domain.dto;
 
 
 import com.example.demo.domain.entity.BoardEntity;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> parent of e8b61b6 (Delete Back directory)
 import com.example.demo.domain.entity.BoardFileEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
@@ -14,10 +18,24 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+<<<<<<< HEAD
+=======
+=======
+import lombok.*;
+
+import java.time.LocalDateTime;
+
+@Data
+>>>>>>> origin/막내
+>>>>>>> parent of e8b61b6 (Delete Back directory)
 @NoArgsConstructor
 @AllArgsConstructor
 public class BoardDto {
     private Long id;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> parent of e8b61b6 (Delete Back directory)
     private String boardWriter;
     private String boardPass;
     private String boardTitle;
@@ -52,12 +70,33 @@ public class BoardDto {
         boardDto.setId(boardEntity.getId());
         boardDto.setBoardWriter(boardEntity.getBoardWriter());
         boardDto.setBoardPass(boardEntity.getBoardPass());
+<<<<<<< HEAD
+=======
+=======
+//    private String boardWriter;
+//    private String boardPass;
+    private String boardTitle;
+    private String boardContents;
+    private int boardHits;
+    private LocalDateTime boardCreateTime;
+    private LocalDateTime boardUpdateTime;
+
+    public static BoardDto toBoardDto(BoardEntity boardEntity){
+        BoardDto boardDto = new BoardDto();
+
+        boardDto.setId(boardEntity.getId());
+>>>>>>> origin/막내
+>>>>>>> parent of e8b61b6 (Delete Back directory)
         boardDto.setBoardContents(boardEntity.getBoardContents());
         boardDto.setBoardHits(boardEntity.getBoardHits());
         boardDto.setBoardTitle(boardEntity.getBoardTitle());
         boardDto.setBoardCreateTime(boardEntity.getCreatedTime());
         boardDto.setBoardUpdateTime(boardEntity.getUpdatedTime());
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> parent of e8b61b6 (Delete Back directory)
         // 첨부파일 유무 체크
         if (boardEntity.getFileAttached() == 0) {
             boardDto.setFileAttached(0);
@@ -76,6 +115,11 @@ public class BoardDto {
             boardDto.setBoardFileDtoList(fileDtoList);
         }
 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> origin/막내
+>>>>>>> parent of e8b61b6 (Delete Back directory)
         return boardDto;
     }
 

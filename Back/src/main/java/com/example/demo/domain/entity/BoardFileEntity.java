@@ -1,7 +1,13 @@
 package com.example.demo.domain.entity;
 
 import jakarta.persistence.*;
+<<<<<<< HEAD
 import lombok.*;
+=======
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+>>>>>>> parent of e8b61b6 (Delete Back directory)
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
 
@@ -41,8 +47,11 @@ import org.springframework.boot.autoconfigure.web.WebProperties;
 @ToString
 @Setter
 @Table(name = "board_file_table")
+<<<<<<< HEAD
 @NoArgsConstructor
 @AllArgsConstructor
+=======
+>>>>>>> parent of e8b61b6 (Delete Back directory)
 public class BoardFileEntity extends BaseEntity{
 
     @Id
@@ -55,9 +64,12 @@ public class BoardFileEntity extends BaseEntity{
     @Column(name = "stored_file_name")
     private String storedFilename;
 
+<<<<<<< HEAD
     @Column(name = "file_size") // 파일 크기
     private Long fileSize;
 
+=======
+>>>>>>> parent of e8b61b6 (Delete Back directory)
     // N:1관계(board_file_table입장에서)
     @ManyToOne(fetch = FetchType.LAZY) // Eager -> 부모테이블 조회시 자식 테이블도 같이 다 조회, Lazy -> 부모테이블 조회 시 필요한 상황에만 호출
     @JoinColumn(name = "board_id")  // 만들어질 컬럼 이름
@@ -68,15 +80,22 @@ public class BoardFileEntity extends BaseEntity{
     public static BoardFileEntity toBoardFileEntity
                                                     (BoardEntity boardEntity,
                                                      String originalFilename,
+<<<<<<< HEAD
                                                     String storedFilename,
                                                     Long fileSize)
+=======
+                                                    String storedFilename)
+>>>>>>> parent of e8b61b6 (Delete Back directory)
     {
         BoardFileEntity boardFileEntity = new BoardFileEntity();
         boardFileEntity.setOriginalFilename(originalFilename);
         boardFileEntity.setStoredFilename(storedFilename);
         boardFileEntity.setBoardEntity(boardEntity);
+<<<<<<< HEAD
         boardFileEntity.setFileSize(fileSize);
 
+=======
+>>>>>>> parent of e8b61b6 (Delete Back directory)
         return boardFileEntity;
     }
 

@@ -25,6 +25,12 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password; // 비밀번호
 
+<<<<<<< HEAD
+=======
+    @Column(name = "is_lock", nullable = false)
+    private Boolean isLock = false;
+
+>>>>>>> parent of e8b61b6 (Delete Back directory)
     @Column(name = "is_social", nullable = false)
     private Boolean isSocial = false;
 
@@ -46,9 +52,12 @@ public class User {
     @Column(name = "email")
     private String email;
 
+<<<<<<< HEAD
 //    @Column(name = "is_lock", nullable = false)
 //    private Boolean isLock = false;
 
+=======
+>>>>>>> parent of e8b61b6 (Delete Back directory)
 //    @CreatedDate
 //    @Column(name = "created_date", updatable = false)
 //    private LocalDateTime createdDate;
