@@ -17,6 +17,10 @@ const Header = () => {
         navigate('/'); // 메인 페이지로 이동 (경로가 메인 페이지인 / 로 가정)
     };
 
+    const searchUser () = > {
+        
+    }
+
     return(
         <>
             <header className="header">
@@ -26,6 +30,9 @@ const Header = () => {
                             {isLoggedIn ? (
                                 // 로그인 상태
                                 <>
+                                    <li className="topNavli">
+                                        <a className="logout" to="/logout" onClick={searchUser}><img className="imgLogout" src="/images/join.svg" alt="로그아웃"/>${}님</a>
+                                    </li>
                                     <li className="topNavli">
                                         <Link className="mypage" to="/mypage" ><img className="imgMypage" src="/images/login.svg" alt="마이페이지"/>마이페이지</Link>
                                     </li>
