@@ -11,8 +11,11 @@ public interface BoardFileRepository extends JpaRepository<BoardFileEntity, Long
     // select * from board_file_table where board_id = ?
     List<BoardFileEntity> findAllByBoardEntityId(Long boardId);
 
+<<<<<<< HEAD
     // 게시글에 첨부된 파일의 총 개수
     // JPA Naming Convention을 사용해서 자동으로 쿼리가 완성됨
     // select count(*) from board_file_table where board_id = ?
     long countByBoardEntityId(Long boardId);
+=======
+>>>>>>> parent of e8b61b6 (Delete Back directory)
 }

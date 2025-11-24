@@ -65,6 +65,10 @@ public class UserRestController {
         User user = User.builder()
                 .username(userDto.getUsername())
                 .password( passwordEncoder.encode(userDto.getPassword()))
+<<<<<<< HEAD
+=======
+                .isLock(false) // 기본적으로 잠금 해제 상태
+>>>>>>> parent of e8b61b6 (Delete Back directory)
                 .isSocial(false) // 일반 가입
                 .roleType(UserRoleType.USER)
                 .name(userDto.getName())
@@ -176,4 +180,8 @@ public class UserRestController {
     }
 
 
+<<<<<<< HEAD
+=======
+    // endpoint 추가 : @Operation(summary="join", description = "JOIN")
+>>>>>>> parent of e8b61b6 (Delete Back directory)
 }

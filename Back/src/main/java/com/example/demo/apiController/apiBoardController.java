@@ -255,12 +255,17 @@ public class apiBoardController {
     // 게시글 수정
     // ################################################################
 
+<<<<<<< HEAD
     // Put api/board/update/{id}
+=======
+    // Put api/board/{id}
+>>>>>>> parent of e8b61b6 (Delete Back directory)
     @Operation(summary = "게시글 수정 처리", description = "수정된 게시글 정보를 받아 DB에 반영하고, 수정된 DTO를 JSON으로 반환")
     @PutMapping("/update/{id}")
     public ResponseEntity<BoardDto> updateBoard(
             @PathVariable Long id,
             @ModelAttribute BoardDto boardDto,  // ModelAttribute로 받아서 텍스트 필드와 boardDto내의 MultipartFile 필드를 받도록 준비
+<<<<<<< HEAD
             @RequestParam(value = "uploadFiles", required = false) List<MultipartFile> newFiles, // 2. 새 파일들 클라이언트에서 uploadFiles로 보냄
             @RequestParam(value = "deleteFileIds", required = false) List<Long> deleteFileIds   // 삭제할 파일들 클라이언트에서 deleteFileIds로 보냄
     ){
@@ -279,11 +284,32 @@ public class apiBoardController {
         try{
             // BoardService에 텍스트, 새 파일, 삭제할 ID 목록을 전달
             BoardDto updateBoard = boardService.update(boardDto, newFiles, deleteFileIds);
+=======
+            @RequestParam(value = "uploadFiles", required = false) List<MultipartFile> uploadFiles, // 2. 새 파일들
+            @RequestParam(value = "deleteFileIds", required = false) List<Long> deleteFileIds   // 삭제할 파일들
+    ){
+        log.info("Put /api/board/{id}... 게시글 수정 apiBoardController", id);
+
+        if(boardDto.getId() == null){
+            boardDto.setId(id);
+        }
+
+//        // 경로 변수 id와 Dto의 id가 일치하도록 강제하거나 확인
+//        if(boardDto.getId() == null || !boardDto.getId().equals(id)){
+//            log.warn("ID 불일치: URL ID({})와 DTO ID({})", id, boardDto.getId());
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        }
+
+        try{
+            // BoardService에 텍스트, 새 파일, 삭제할 ID 목록을 전달
+            BoardDto updateBoard = boardService.update(boardDto, uploadFiles, deleteFileIds);
+>>>>>>> parent of e8b61b6 (Delete Back directory)
 
             log.info("게시글 수정 완료, ID: ()", updateBoard.getId());
 
             // 수정된 DTO와 200 OK상태 반환
             return new ResponseEntity<>(updateBoard, HttpStatus.OK);
+<<<<<<< HEAD
         }catch (IllegalArgumentException e){
             // 비밀번호 불일치 예외 처리(서비스 계층에서 발생시킨다고 가정)
             if(e.getMessage().contains("비밀번호")){
@@ -294,6 +320,9 @@ public class apiBoardController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);    // 다른 유효성 오류
 
         }catch(Exception e){
+=======
+        }catch (Exception e){
+>>>>>>> parent of e8b61b6 (Delete Back directory)
             log.error("게시글 수정 중 오류 발생: {}", e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

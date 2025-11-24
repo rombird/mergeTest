@@ -114,7 +114,19 @@ case "$( uname )" in                #(
   NONSTOP* )        nonstop=true ;;
 esac
 
+<<<<<<< HEAD
 CLASSPATH="\\\"\\\""
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+CLASSPATH="\\\"\\\""
+=======
+CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
+>>>>>>> origin/대장
+=======
+CLASSPATH="\\\"\\\""
+>>>>>>> origin/막내
+>>>>>>> parent of e8b61b6 (Delete Back directory)
 
 
 # Determine the Java command to use to start the JVM.
@@ -213,7 +225,19 @@ DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m"'
 set -- \
         "-Dorg.gradle.appname=$APP_BASE_NAME" \
         -classpath "$CLASSPATH" \
+<<<<<<< HEAD
         -jar "$APP_HOME/gradle/wrapper/gradle-wrapper.jar" \
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+        -jar "$APP_HOME/gradle/wrapper/gradle-wrapper.jar" \
+=======
+        org.gradle.wrapper.GradleWrapperMain \
+>>>>>>> origin/대장
+=======
+        -jar "$APP_HOME/gradle/wrapper/gradle-wrapper.jar" \
+>>>>>>> origin/막내
+>>>>>>> parent of e8b61b6 (Delete Back directory)
         "$@"
 
 # Stop when "xargs" is not available.

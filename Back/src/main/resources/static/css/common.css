@@ -1,21 +1,53 @@
 @font-face {
             font-family: 'nexonBold';
+<<<<<<< HEAD
             src: url('/font/NEXONLv1GothicBold.ttf');
+=======
+<<<<<<< HEAD
+            src: url('/font/NEXONLv1GothicBold.ttf');
+=======
+            src: url('./font/NEXONLv1GothicBold.ttf');
+>>>>>>> origin/막내
+>>>>>>> parent of e8b61b6 (Delete Back directory)
             font-style: normal;
         }
         @font-face {
             font-family: 'nexonLight';
+<<<<<<< HEAD
             src: url('/font/NEXONLv1GothicLight.ttf');
+=======
+<<<<<<< HEAD
+            src: url('/font/NEXONLv1GothicLight.ttf');
+=======
+            src: url('./font/NEXONLv1GothicLight.ttf');
+>>>>>>> origin/막내
+>>>>>>> parent of e8b61b6 (Delete Back directory)
             font-style: normal;
         }
         @font-face {
             font-family: 'nexonRegular';
+<<<<<<< HEAD
             src: url('/font/NEXONLv1GothicRegular.ttf');
+=======
+<<<<<<< HEAD
+            src: url('/font/NEXONLv1GothicRegular.ttf');
+=======
+            src: url('./font/NEXONLv1GothicRegular.ttf');
+>>>>>>> origin/막내
+>>>>>>> parent of e8b61b6 (Delete Back directory)
             font-style: normal;
         }
         @font-face {
             font-family: 'logo';
+<<<<<<< HEAD
             src: url('/font/BitcountGridDouble-SemiBold.ttf');
+=======
+<<<<<<< HEAD
+            src: url('/font/BitcountGridDouble-SemiBold.ttf');
+=======
+            src: url('./font/BitcountGridDouble-SemiBold.ttf');
+>>>>>>> origin/막내
+>>>>>>> parent of e8b61b6 (Delete Back directory)
             font-style: normal;
         }
 * {

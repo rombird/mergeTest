@@ -1,7 +1,14 @@
 package com.example.demo.domain.entity;
 
 
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonFormat;
+=======
+<<<<<<< HEAD
+import com.fasterxml.jackson.annotation.JsonFormat;
+=======
+>>>>>>> origin/막내
+>>>>>>> parent of e8b61b6 (Delete Back directory)
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -22,12 +29,26 @@ import java.time.LocalDateTime;
 @Getter
 public class BaseEntity {
 
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/막내
+>>>>>>> parent of e8b61b6 (Delete Back directory)
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime createdTime;
 
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/막내
+>>>>>>> parent of e8b61b6 (Delete Back directory)
     @UpdateTimestamp
     @Column(insertable = false)
     private LocalDateTime updatedTime;
