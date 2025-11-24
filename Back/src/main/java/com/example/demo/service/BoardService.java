@@ -188,7 +188,7 @@ public class BoardService {
                 // DB에서 파일 정보 조회
                 BoardFileEntity fileEntity = boardFileRepository.findById(fileId).orElse(null);
 
-                if (fileEntity != null) {
+                if (fileEntity != null) {   // 삭제하는 파일이 파일엔티티에 담겨있다면?
                     // 로컬 디스크에서 파일 삭제
                     String savePath = fileDir + fileEntity.getStoredFilename();
                     File file = new File(savePath);

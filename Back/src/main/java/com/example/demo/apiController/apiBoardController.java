@@ -285,7 +285,11 @@ public class apiBoardController {
             // 수정된 DTO와 200 OK상태 반환
             return new ResponseEntity<>(updateBoard, HttpStatus.OK);
         }catch (IllegalArgumentException e){
+<<<<<<< HEAD
             // 비밀번호 불일치 예외 처리(서비스 계층에서 발생시킨다고 가정)
+=======
+            // 비밀번호 불일치 예외 처리
+>>>>>>> 니혼진
             if(e.getMessage().contains("비밀번호")){
                 log.warn("게시글 수정 실패: 비밀번호 불일치 (ID: {})", id);
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();  // 401 반환
