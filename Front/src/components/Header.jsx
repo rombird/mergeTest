@@ -31,7 +31,7 @@ const Header = () => {
                                 // 로그인 상태
                                 <>
                                     <li className="topNavli">
-                                        <a className="logout" to="#void" >${displayUsername}님</a>
+                                        <a className="logout" to="#void" >{displayUsername}님</a>
                                     </li>
                                     <li className="topNavli">
                                         <Link className="mypage" to="/mypage" ><img className="imgMypage" src="/images/login.svg" alt="마이페이지"/>마이페이지</Link>

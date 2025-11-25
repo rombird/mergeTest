@@ -5,6 +5,8 @@ import "../../css/common.css";
 
 const MyPage = () => {
 
+
+
     return (
         <>
             <main>
@@ -47,7 +49,7 @@ const MyPage = () => {
                                 <p>비밀번호(PW)</p>
                             </dt>
                             <dd className="table-update">
-                                <button className="btn-name" type="button" >비밀번호 변경</button>
+                                <input placeholder='변경할 비밀번호' name='password' id='password'/><button className="btn-name" type="button" >비밀번호 변경</button>
                             </dd>
                         </dl>
                         <dl className="table">
@@ -63,7 +65,7 @@ const MyPage = () => {
                                 <p>연락처</p>
                             </dt>
                             <dd className="table-update phone-update">
-                                <p>해당유저연락처</p>
+                                <input placeholder='너의 연락처' name='phone' id='phone'/>
                                 <div>
                                     <button className="btn-name" type="button" >연락처 변경</button>
                                 </div>

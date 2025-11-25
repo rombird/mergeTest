@@ -3,13 +3,18 @@ package com.example.demo.service;
 import com.example.demo.config.auth.jwt.JwtTokenProvider;
 import com.example.demo.config.auth.jwt.TokenInfo;
 import com.example.demo.config.auth.redis.RedisUtil;
+import com.example.demo.domain.dto.BoardDto;
 import com.example.demo.domain.dto.UserDto;
 import com.example.demo.domain.dto.UserResponseDto;
+import com.example.demo.domain.entity.BoardEntity;
+import com.example.demo.domain.entity.BoardFileEntity;
 import com.example.demo.domain.entity.User;
 import com.example.demo.domain.entity.UserRoleType;
 import com.example.demo.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Safelist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,6 +23,11 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -120,8 +130,9 @@ public class UserService {
         }
 
     }
-
+    // ##############################################
     // 회원정보 조회
+    // ##############################################
     // 인증된 사용자 이름을 기반으로 DB에서 사용자 정보를 조회하고 DTO로 변환하여 반환합니다
     // @Param -> username 현재 인증된 사용자의 이름
     // @return -> userResponseDto (사용자 이름, 권한)
@@ -136,6 +147,97 @@ public class UserService {
         // Dto 변환 후 반환
         return UserResponseDto.fromEntity(user);
     }
+
+    // ############################################
+    // 회원정보 수정
+    // ##########################################
+
+    
+
+
+
+
+//    @jakarta.transaction.Transactional
+//    public BoardDto update(BoardDto boardDto, List<MultipartFile> newFiles, List<Long> deleteFileIds) throws IOException {
+//        // 1. 기존 게시글 조회
+//        BoardEntity boardEntity = boardRepository.findById(boardDto.getId())
+//                .orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없습니다."));
+//
+//        // 2. 비밀번호 검증
+//        if (!boardEntity.getBoardPass().equals(boardDto.getBoardPass())){
+//            // 비밀번호가 틀릴 경우 예외 발생
+//            throw new IllegalArgumentException("게시글 수정 실패: 비밀번호가 일치하지 않습니다");
+//        }
+//
+//        // 3. 텍스트 정보 업데이트 (제목, 내용)
+//        // 불필요한 HTML 태그 제거
+//        if (boardDto.getBoardContents() != null) {
+//            String cleanText = Jsoup.clean(boardDto.getBoardContents(), Safelist.basicWithImages());
+//
+//            boardEntity.updateText(boardDto.getBoardTitle(), cleanText);
+//        }
+//
+//        // 4. 파일 삭제 처리
+//        if (deleteFileIds != null && !deleteFileIds.isEmpty()) {
+//            for (Long fileId : deleteFileIds) {
+//                // DB에서 파일 정보 조회
+//                BoardFileEntity fileEntity = boardFileRepository.findById(fileId).orElse(null);
+//
+//                if (fileEntity != null) {   // 삭제하는 파일이 파일엔티티에 담겨있다면?
+//                    // 로컬 디스크에서 파일 삭제
+//                    String savePath = fileDir + fileEntity.getStoredFilename();
+//                    File file = new File(savePath);
+//                    if (file.exists()) {
+//                        if(!file.delete()){
+//                            log.error("파일 삭제 실패: {}", savePath);
+//                        }
+//                    }
+//                    // DB에서 파일 데이터 삭제
+//                    boardFileRepository.delete(fileEntity);
+//                }
+//            }
+//        }
+//
+//        // 5. 새 파일 추가 처리
+//        if (newFiles != null && !newFiles.isEmpty()) {
+//            for (MultipartFile boardFile : newFiles) {
+//                if (!boardFile.isEmpty()) {
+//                    String originalFilename = boardFile.getOriginalFilename();
+//                    String storedFilename = System.currentTimeMillis() + "_" + originalFilename;
+//                    String savePath = fileDir + storedFilename;
+//
+//                    Long fileSize = boardFile.getSize();    // 파일 크기 가져오기
+//
+//                    boardFile.transferTo(new File(savePath));
+//
+//                    BoardFileEntity boardFileEntity = BoardFileEntity.toBoardFileEntity(boardEntity, originalFilename, storedFilename, fileSize);
+//                    boardFileRepository.save(boardFileEntity);
+//                }
+//            }
+//        }
+//
+//        // 6. 파일 첨부 여부(fileAttached) 상태 업데이트
+//        // 현재 이 게시글에 연결된 파일 개수 확인
+//        // 변경 사항이 즉시 DB에 반영되도록 saveAndFlush를 호출
+//        // 삭제 및 추가된 파일 정보가 모두 DB에 담기기 위해서
+//        boardRepository.saveAndFlush(boardEntity); // 변경 사항 즉시 반영 (혹시 모를 지연 처리 방지)
+//
+//        long currentFileCount = boardFileRepository.countByBoardEntityId(boardEntity.getId());
+//
+//        if(currentFileCount == 0){
+//            boardEntity.updateFileAttached(0);
+//        }else{
+//            boardEntity.updateFileAttached(1);
+//        }
+//
+//        return BoardDto.toBoardDto(boardEntity);
+//    }
+
+
+
+
+
+
 
 
 
