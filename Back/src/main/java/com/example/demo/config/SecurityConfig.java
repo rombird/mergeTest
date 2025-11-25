@@ -77,15 +77,16 @@ public class SecurityConfig {
                                         "/login",
                                         "/validate",
                                         "/oauth2/**",
-                                        "/login/oauth2/**").permitAll();
+                                        "/login/oauth2/**",
+                                        // 게시판 관련 로그인 없어도 볼 수 있는 것들
+                                        "/api/board/paging",
+                                        "/api/board/*",
+                                        "/api/board/download/**"
+            ).permitAll();
 
-            // 게시판 API 권한 설정
-            // 로그인 없어도 OK
-            auth.requestMatchers("/api/board/paging").permitAll();  // 게시판 조회
-            auth.requestMatchers("/api/board/{id}").permitAll();    // 상세 조회
-            auth.requestMatchers("/api/board/download/**").permitAll(); // 첨부파일 다운로드
 
-            // 로그인 해야지 가능
+
+//            // 로그인 해야지 가능
             auth.requestMatchers("/api/board/WriteBoard").authenticated();   // 글 작성
             auth.requestMatchers("/api/board/update/**").authenticated();   // 글 수정
             auth.requestMatchers("/api/board/delete/**").authenticated();   // 글 삭제

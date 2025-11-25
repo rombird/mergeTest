@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @Entity
-//@EntityListeners(AuditingEntityListener.class) // 엔티티가 저장되거나 업데이트될때 현재시간이나 로그인한 사용자 Id 자동 주입
+@EntityListeners(AuditingEntityListener.class) // 엔티티가 저장되거나 업데이트될때 현재시간이나 로그인한 사용자 Id 자동 주입
 public class User {
 
     @Id
@@ -49,17 +49,17 @@ public class User {
 //    @Column(name = "is_lock", nullable = false)
 //    private Boolean isLock = false;
 
-//    @CreatedDate
-//    @Column(name = "created_date", updatable = false)
-//    private LocalDateTime createdDate;
+    @CreatedDate
+    @Column(name = "created_date", updatable = false)
+    private LocalDateTime createdDate;
 
-//    @LastModifiedDate
-//    @Column(name = "updated_date")
-//    private LocalDateTime updatedDate;
+    @LastModifiedDate
+    @Column(name = "updated_date")
+    private LocalDateTime updatedDate;
 
     // 수정가능한 항목 - email, phone
-    public void updateUser(UserDto dto) {
-        this.email = dto.getEmail();
-        this.phone = dto.getPhone();
+    public void updateUser(String newEmail, String newPhone) {
+        this.email = newEmail;
+        this.phone = newPhone;
     }
 }

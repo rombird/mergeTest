@@ -1,13 +1,14 @@
-import React, {useState,useEffect} from 'react'
+import React, {createContext, useState, useEffect} from 'react'
 import {Link, useNavigate} from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import "../css/common.css";
 
 
 const Header = () => {
-    const { isLoggedIn, logout } = useAuth(); 
+    const { isLoggedIn, logout, user } = useAuth(); 
     const navigate = useNavigate(); // useNavigate 훅 초기화
 
+    console.log("유저정보: {}", user);
     // 로그아웃 처리 함수
     const handleLogout = async (e) => {
         // 폼의 기본 동작 방지 (Link 대신 button/onClick을 사용할 경우 불필요하지만 습관적으로 체크)
@@ -17,9 +18,8 @@ const Header = () => {
         navigate('/'); // 메인 페이지로 이동 (경로가 메인 페이지인 / 로 가정)
     };
 
-    const searchUser () = > {
-        
-    }
+    const displayUsername = user ? user.name : '';
+    
 
     return(
         <>
@@ -31,7 +31,7 @@ const Header = () => {
                                 // 로그인 상태
                                 <>
                                     <li className="topNavli">
-                                        <a className="logout" to="/logout" onClick={searchUser}><img className="imgLogout" src="/images/join.svg" alt="로그아웃"/>${}님</a>
+                                        <a className="logout" to="#void" >${displayUsername}님</a>
                                     </li>
                                     <li className="topNavli">
                                         <Link className="mypage" to="/mypage" ><img className="imgMypage" src="/images/login.svg" alt="마이페이지"/>마이페이지</Link>

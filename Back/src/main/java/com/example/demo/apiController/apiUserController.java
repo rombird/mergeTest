@@ -1,25 +1,25 @@
-package com.example.demo.controller;
+package com.example.demo.apiController;
 
 import com.example.demo.config.auth.jwt.JwtProperties;
 import com.example.demo.config.auth.jwt.JwtTokenProvider;
-import com.example.demo.config.auth.jwt.TokenInfo;
 import com.example.demo.config.auth.redis.RedisUtil;
 import com.example.demo.domain.dto.UserDto;
+import com.example.demo.domain.dto.UserResponseDto;
 import com.example.demo.domain.entity.User;
 import com.example.demo.domain.entity.UserRoleType;
 import com.example.demo.domain.repository.UserRepository;
-import io.swagger.v3.oas.annotations.Operation;
+import com.example.demo.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
@@ -35,7 +35,7 @@ import java.util.Optional;
 @RestController
 @Slf4j
 @Tag(name="UserController", description="This is User Controller")
-public class UserRestController {
+public class apiUserController {
     @Autowired
     private UserRepository userRepository;
 
@@ -45,8 +45,12 @@ public class UserRestController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-//    @Autowired
-//    private JwtTokenRepository jwtTokenRepository;
+    private final UserService userService;
+
+    public apiUserController(UserService userService){
+        this.userService = userService;
+    }
+
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
@@ -57,23 +61,17 @@ public class UserRestController {
 //    @Operation(summary="join", description = "JOIN")
     @PostMapping(value = "/join", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<String> join_post(@RequestBody UserDto userDto){
-        log.info("POST /join..." + userDto);
+    public ResponseEntity<Map<String, String>> join_post(@Valid @RequestBody UserDto userDto){
+        log.info("POST /join... 회원가입, UserRestController 유저이름은? {}" , userDto.getUsername());
 
-        //dto -> entity
-        User user = User.builder()
-                .username(userDto.getUsername())
-                .password( passwordEncoder.encode(userDto.getPassword()))
-                .isSocial(false) // 일반 가입
-                .roleType(UserRoleType.USER)
-                .name(userDto.getName())
-                .phone(userDto.getPhone())
-                .email(userDto.getEmail())
-                .build();
+        userService.join(userDto);
 
-        // save entity to DB
-        userRepository.save(user);
-        return new ResponseEntity<String>("success", HttpStatus.OK);
+        // 성공 시 응답
+        Map<String, String> response = new HashMap<>();
+        response.put("status", "success");
+        response.put("message", "회원가입 성공");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
     }
 
 
@@ -88,75 +86,57 @@ public class UserRestController {
         Map<String, Object> response = new HashMap<>();
 
         try{
-            //사용자 인증 시도(ID/PW 일치여부 확인)
-            Authentication authentication =
-                    authenticationManager.authenticate(
-                            new UsernamePasswordAuthenticationToken(userDto.getUsername(),userDto.getPassword())
-                    ); // token으로 전달 ( id, pw 일치여부 -> authentication으로 반환)
-            System.out.println("인증성공 : " + authentication);
+            UserService.LoginResult loginResult = userService.login(userDto.getUsername(), userDto.getPassword());
 
-            //Token 생성
-            TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
-            System.out.println("JWT TOKEN : " + tokenInfo);
-
-            //REDIS 에 REFRESH 저장
-            redisUtil.save("RT:"+authentication.getName() , tokenInfo.getRefreshToken());
-            //
             response.put("state","success");
             response.put("message","인증성공!");
 
             //---------------------------------------------
-            Cookie accessCookie = new Cookie(JwtProperties.ACCESS_TOKEN_COOKIE_NAME, tokenInfo.getAccessToken());
+            Cookie accessCookie = new Cookie(JwtProperties.ACCESS_TOKEN_COOKIE_NAME,
+                                            loginResult.getTokenInfo().getAccessToken());
             accessCookie.setHttpOnly(true); // !!!!!!!!!!!!!!!!!!!!!!!!!! (중요) 쿠키에 관한 보안 처리 옵션(fn로 쿠키를 받았을 때 js에 접근 불허하는 옵션) !!!!!!!!!!!!!!!!!!!!!!!!!!
             accessCookie.setSecure(false); // Only for HTTPS : 가비아 도메인 사면 해당 옵션 풀어주기(접근차단 옵션이기때문에)
             accessCookie.setPath("/"); // Define valid paths
             accessCookie.setMaxAge(JwtProperties.ACCESS_TOKEN_EXPIRATION_TIME); // 1 hour expiration
 
-            // Set refresh-token as HTTP-only cookie
-//            Cookie refreshCookie = new Cookie(JwtProperties.REFRESH_TOKEN_COOKIE_NAME, tokenInfo.getRefreshToken());
-//            refreshCookie.setHttpOnly(true);
-//            accessCookie.setSecure(false); // Only for HTTPS
-//            refreshCookie.setPath("/");
-//            refreshCookie.setMaxAge(JwtProperties.REFRESH_TOKEN_EXPIRATION_TIME); // 7 days expiration
-
-            Cookie userCookie = new Cookie("username", authentication.getName());
+            // 사용자 이름 쿠키 설정(로그인 상태 확인 등 UI 용도)
+            Cookie userCookie = new Cookie("username", loginResult.getUsername());
             userCookie.setHttpOnly(true);
             accessCookie.setSecure(false); // Only for HTTPS
             userCookie.setPath("/");
             userCookie.setMaxAge(JwtProperties.REFRESH_TOKEN_EXPIRATION_TIME); // 7 days expiration
 
+            // 응답에 쿠키 추가
             resp.addCookie(accessCookie);
-//            resp.addCookie(refreshCookie);
             resp.addCookie(userCookie);
+
+            // 최종 성공 응답 반환
+            return new ResponseEntity<>(response, HttpStatus.OK);
             //---------------------------------------------
-        }catch(AuthenticationException e){
-            System.out.println("인증실패 : " + e.getMessage());
-            response.put("state","fail");
-            response.put("message",e.getMessage());
-            return new ResponseEntity(response,HttpStatus.UNAUTHORIZED);
+        } catch(AuthenticationException e) {
+                // 인증 실패 처리 (AuthenticationManager가 예외를 던짐)
+                System.out.println("인증실패, userRestController(login method) : " + e.getMessage());
+                response.put("state", "fail");
+                response.put("message", e.getMessage());
+                return new ResponseEntity(response, HttpStatus.UNAUTHORIZED);
+
         }
-        return new ResponseEntity(response,HttpStatus.OK);
     }
 
 
 
 //    @Operation(summary="user", description = "USER")
     @GetMapping("/user")
-    public ResponseEntity< Map<String,Object> > user(HttpServletRequest request, Authentication authentication) {
-        log.info("GET /user..." + authentication);
-        log.info("name..." + authentication.getName());
+    public ResponseEntity<UserResponseDto> findUser(Authentication authentication) {
+        // 요청, 인증 정보 수집
+        // Spring security가 인증에 실패하면 Controller에 도달하지 않고 401을 반환해야 한다
+        String username = authentication.getName(); // 인증정보에 들어있는 name획득
 
-        Optional<User> userOptional =  userRepository.findById(authentication.getName()); // accesstoken의 내용은 비워버려서 userrepository에서 authentication 확인
-        Map<String, Object> response = new HashMap<>();
+        log.info("GET /findUser... 회원정보 조회, apiUserController, 넌 누구냐? {} ", authentication.getName());
 
-        if(userOptional.isPresent()){
-            User user = userOptional.get();
-            response.put("username",user.getUsername());
-            response.put("role",user.getRoleType());
+        UserResponseDto userResponseDto = userService.findUserInfoByUsername(username);
 
-            return new ResponseEntity<>(response , HttpStatus.OK);
-        }
-        return new ResponseEntity<>(null , HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(userResponseDto, HttpStatus.OK);
     }
 
     // FN Login.jsx에서 토큰 유효성 검증과 관련
