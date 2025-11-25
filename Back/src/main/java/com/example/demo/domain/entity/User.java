@@ -1,6 +1,7 @@
 package com.example.demo.domain.entity;
 
 import com.example.demo.domain.dto.UserDto;
+import com.fasterxml.jackson.databind.ser.Serializers;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -49,13 +50,13 @@ public class User {
 //    @Column(name = "is_lock", nullable = false)
 //    private Boolean isLock = false;
 
-    @CreatedDate
-    @Column(name = "created_date", updatable = false)
-    private LocalDateTime createdDate;
-
-    @LastModifiedDate
-    @Column(name = "updated_date")
-    private LocalDateTime updatedDate;
+//    @CreatedDate
+//    @Column(name = "created_date", updatable = false)
+//    private LocalDateTime createdDate;
+//
+//    @LastModifiedDate
+//    @Column(name = "updated_date")
+//    private LocalDateTime updatedDate;
 
     // 수정가능한 항목 - email, phone
     public void updateUser(String newEmail, String newPhone) {

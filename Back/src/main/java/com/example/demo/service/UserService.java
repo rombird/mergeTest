@@ -99,6 +99,16 @@ public class UserService {
     // password 비밀번호
     // return 인증된 사용자의 이름과 발급된 토큰 정보를 담는 객체
     public LoginResult login(String username, String password) throws AuthenticationException {
+        Optional<User> opt = userRepository.findById(username);
+        if(opt.isPresent()){
+            String stored = opt.get().getPassword();
+            System.out.println(">>> DB stored password for " + username + " : " + stored);
+            System.out.println(">>> passwordEncoder.matches(raw, stored) => " + passwordEncoder.matches(password, stored));
+        } else {
+            System.out.println(">>> user not found in debug check");
+        }
+
+
 
         // 사용자 인증 시도
         Authentication authentication =
@@ -112,6 +122,8 @@ public class UserService {
         // Redis에 Refresh Token 저장
         // RT 접두사를 붙여 Redis 키 관리
         redisUtil.save("RT" + authentication.getName(), tokenInfo.getRefreshToken());
+
+
 
         // 결과를 반환하여 Controller가 Http 응답을 처리하도록 던짐
         return new LoginResult(authentication.getName(), tokenInfo);

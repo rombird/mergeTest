@@ -1,9 +1,11 @@
 package com.example.demo.domain.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.example.demo.domain.entity.User;
 import com.example.demo.domain.entity.UserRoleType;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -33,8 +35,8 @@ public class UserDto {
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).{8,15}$")     // 정규식
     private String password;
 
-    @NotBlank
-    private int birthday;
+//    @NotBlank
+//    private int birthday;
 
     @NotBlank
     private String name;
@@ -50,6 +52,12 @@ public class UserDto {
     // OAUTH2 CLIENT INFO : 어떤 소셜인지 provider로
     private String provider;
     private String providerId;
+
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+//    private LocalDateTime userCreateTime;
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+//    private LocalDateTime userUpdateTime;
+
 
     // DTO -> ENTITY : 사용자가 입력한 정보를 바탕으로 DB에 넣을 객체 생성
     public User toEntity(){
