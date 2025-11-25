@@ -4,11 +4,14 @@ import com.example.demo.config.auth.jwt.JwtProperties;
 import com.example.demo.config.auth.jwt.JwtTokenProvider;
 import com.example.demo.config.auth.redis.RedisUtil;
 import com.example.demo.domain.dto.UserDto;
+import com.example.demo.domain.dto.UserPasswordUpdateDto;
 import com.example.demo.domain.dto.UserResponseDto;
+import com.example.demo.domain.dto.UserUpdateDto;
 import com.example.demo.domain.entity.User;
 import com.example.demo.domain.entity.UserRoleType;
 import com.example.demo.domain.repository.UserRepository;
 import com.example.demo.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,7 +26,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
@@ -124,8 +129,10 @@ public class apiUserController {
     }
 
 
-
-//    @Operation(summary="user", description = "USER")
+    // ##################################################
+    // 회원정보 조회하는 api주소
+    // ##################################################
+    @Operation(summary="user", description = "회원정보 조회")
     @GetMapping("/user")
     public ResponseEntity<UserResponseDto> findUser(Authentication authentication) {
         // 요청, 인증 정보 수집
@@ -139,24 +146,50 @@ public class apiUserController {
         return new ResponseEntity<>(userResponseDto, HttpStatus.OK);
     }
 
+    // #########################################
+    // 회원 정보 수정(이메일, 연락처)
+    // #########################################
+
+    @PutMapping("/myInfo/phone")
+    public ResponseEntity<UserResponseDto> updateUserPhone(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @Valid @RequestBody UserUpdateDto updateDto){
+
+        String username = userDetails.getUsername();   // 로그인된 사용자 ID 획득
+        UserResponseDto userResponseDto = userService.update(username, updateDto);  // 내용 수정
+
+        return ResponseEntity.ok(userResponseDto);
+    }
+
+    // #########################################
+    // 비밀번호 수정
+    // #########################################
+    @PutMapping("/myInfo/password")
+    public ResponseEntity<String> updatePassword(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @Valid @RequestBody UserPasswordUpdateDto userPasswordUpdateDto) {
+
+        String username = userDetails.getUsername();
+
+        // service로 DTO 전체를 전달
+        userService.updatePassword(username, userPasswordUpdateDto);
+
+        return ResponseEntity.ok("비밀번호가 성공적으로 변경되었습니다");
+
+    }
+
     // FN Login.jsx에서 토큰 유효성 검증과 관련
 //    @Operation(summary="validate", description = "VALIDATE")
     @GetMapping("/validate")
-    public ResponseEntity<String> validateToken() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println("authentication : " + authentication);
-        Collection<? extends GrantedAuthority> auth =  authentication.getAuthorities();
-        auth.forEach(System.out::println);
-        boolean hasRoleAnon = auth.stream()
-                .anyMatch(authority -> "ROLE_ANONYMOUS".equals(authority.getAuthority()));
+    public ResponseEntity<String> validateToken(){
 
-        if (authentication.isAuthenticated() && !hasRoleAnon) {
-            System.out.println("인증된 상태입니다.");
-            return new ResponseEntity<>("",HttpStatus.OK);
+        if(userService.validateAuthentication()){
+            System.out.println("인증된 상태입니다");
+            return ResponseEntity.ok("");
         }
+        System.out.println("미인증된 상태입니다");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("");
 
-        System.out.println("미인증된 상태입니다.");
-        return new ResponseEntity<>("",HttpStatus.UNAUTHORIZED);
     }
 
 

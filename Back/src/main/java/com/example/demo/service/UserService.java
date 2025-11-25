@@ -1,11 +1,10 @@
 package com.example.demo.service;
 
+import com.example.demo.config.auth.exceptionHandler.ResourceNotFoundException;
 import com.example.demo.config.auth.jwt.JwtTokenProvider;
 import com.example.demo.config.auth.jwt.TokenInfo;
 import com.example.demo.config.auth.redis.RedisUtil;
-import com.example.demo.domain.dto.BoardDto;
-import com.example.demo.domain.dto.UserDto;
-import com.example.demo.domain.dto.UserResponseDto;
+import com.example.demo.domain.dto.*;
 import com.example.demo.domain.entity.BoardEntity;
 import com.example.demo.domain.entity.BoardFileEntity;
 import com.example.demo.domain.entity.User;
@@ -16,10 +15,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Safelist;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +29,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -150,10 +154,83 @@ public class UserService {
 
     // ############################################
     // 회원정보 수정
+    // @param username 현재 로그인된 사용자 ID
+    // @param updateDto 수정할 이메일 및 연락처 정보
+    // @return 수정된 사용자 응답 DTO
     // ##########################################
 
-    
+    @Transactional
+    public UserResponseDto update(String username, UserUpdateDto updateDto){
 
+        // 기존 회원 조회
+        User user = userRepository.findById(username)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
+
+        // Entity의 수정 메서드를 사용하여 데이터 업데이트
+        user.updateUser(updateDto.getEmail(), updateDto.getPhone());
+
+        userRepository.save(user);
+
+        // DTo로 변환하여 반환
+        return UserResponseDto.fromEntity(user);
+    }
+
+    // ##############################################
+    // 비밀번호 변경
+    // @param username 현재 로그인된 사용자 ID
+    // @param newPassword 새 비밀번호
+    // @return 성공 여부 (true/false)
+    // ##############################################
+    @ Transactional
+    public boolean updatePassword(String username, UserPasswordUpdateDto userPasswordUpdateDto){
+
+        // 사용자 엔티티를 찾음
+        User user = userRepository.findById(username)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
+
+        // 새 비밀번호와 확인 필드 일치 여부 확인
+        if(!userPasswordUpdateDto.getNewPassword().equals(userPasswordUpdateDto.getConfirmNewPassword())){
+            throw new IllegalArgumentException("새 비밀번호오 확인 비밀번호가 일치하지 않습니다");
+        }
+
+        // 현재 비밀번호와 새 비밀번호 일치 여부 확인
+        if(!passwordEncoder.matches(userPasswordUpdateDto.getCurrentPassword(), user.getPassword())){
+            throw new IllegalArgumentException("현재 비밀번호와 새 비밀번호가 일치하지 않습니다");
+        }
+
+        // 새 비밀번호를 암호화하여 저장
+        String encodedPassword = passwordEncoder.encode(userPasswordUpdateDto.getNewPassword());
+        user.setPassword(encodedPassword);  // 암호화된 패스워드 userEntity에 저장
+
+        userRepository.save(user);
+
+        return true;
+    }
+
+
+
+    // ################################################
+    // Validate
+    // ################################################
+    public boolean validateAuthentication(){
+
+        // 스프링 시큐리티의 현재 인증 정보(Authentication 객체)를 꺼냄
+        Authentication authentication = SecurityContextHolder
+                .getContext()
+                .getAuthentication();
+
+        System.out.println("authentication: " + authentication);
+
+        // 현재 사용자에게 부여된 권한 목록을 조회
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+
+        // 현재 권한 목록 중에 ROLE_ANONYMOUS가 있는지 검사
+        boolean isAnonymous = authorities.stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ANONYMOUS"));
+
+        // 인증된 상태에다 익명의 사용자가 아닌 객체 컨트롤러에 반환
+        return authentication.isAuthenticated() && !isAnonymous;
+    }
 
 
 

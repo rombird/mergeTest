@@ -18,8 +18,8 @@ const Header = () => {
         navigate('/'); // 메인 페이지로 이동 (경로가 메인 페이지인 / 로 가정)
     };
 
-    const displayUsername = user ? user.name : '';
     
+    const displayUsername = user ? user.name : '';
 
     return(
         <>

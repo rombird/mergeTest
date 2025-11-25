@@ -9,6 +9,7 @@ const Join  = ()=>{
     const navigate = useNavigate();
     const [username ,setUsername] = useState()
     const [password ,setPassword] = useState()
+    const [rePassword, setRepassword] = useState()
     const [name, setName] = useState()
     const [phone, setPhone] = useState()
     // 이메일

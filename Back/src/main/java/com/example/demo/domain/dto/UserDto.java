@@ -34,6 +34,9 @@ public class UserDto {
     private String password;
 
     @NotBlank
+    private int birthday;
+
+    @NotBlank
     private String name;
 
     @NotBlank
