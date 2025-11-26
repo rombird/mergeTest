@@ -219,6 +219,25 @@ public class UserService {
         return true;
     }
 
+    // ##################################################
+    // 회원 탈퇴
+    // ##################################################
+    @jakarta.transaction.Transactional
+    public void delete(String username, String password){
+        // 사용자 엔티티 조회
+        User user = userRepository.findById(username)
+                        .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다"));
+
+        // 비밀번호 일치 확인
+        if(!passwordEncoder.matches(password, user.getPassword())){
+            throw new IllegalArgumentException("비밀번호가 일치하지 않아 회원탈퇴에 실패했습니다");
+        }
+
+        userRepository.deleteById(username);
+
+
+
+    }
 
 
     // ################################################

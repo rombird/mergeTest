@@ -1,5 +1,6 @@
 package com.example.demo.apiController;
 
+import com.example.demo.config.auth.PrincipalDetails;
 import com.example.demo.config.auth.jwt.JwtProperties;
 import com.example.demo.config.auth.jwt.JwtTokenProvider;
 import com.example.demo.config.auth.redis.RedisUtil;
@@ -178,6 +179,36 @@ public class apiUserController {
 
     }
 
+    // #########################################
+    // 회원 탈퇴
+    // #########################################
+
+    @Operation(summary = "Delete /user", description = "회원탈퇴")
+    @DeleteMapping("/user")
+    public ResponseEntity<String> delete(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody Map<String, String> requestBody){
+
+        // jwt에서 사용자 아이디 추출
+        String username = principalDetails.getUsername();
+
+        // 요청 본문
+        String password = requestBody.get("password");
+
+        if(password == null | password.isEmpty()){
+            return ResponseEntity.badRequest().body("비밀번호를 입력해야 회원탈퇴가 가능합니다");
+        }
+        log.info("Delete /user ... 회원 탈퇴 요청, apiUserController, 누가? {}",username);
+
+        try{
+            userService.delete(username, password);
+            return ResponseEntity.ok("회원 탈퇴 성공");
+        }catch (IllegalArgumentException e){
+            // 비밀번호 불일치 등의 예외 처리
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
+    }
+
+
     // FN Login.jsx에서 토큰 유효성 검증과 관련
 //    @Operation(summary="validate", description = "VALIDATE")
     @GetMapping("/validate")
@@ -191,6 +222,8 @@ public class apiUserController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("");
 
     }
+
+
 
 
 }

@@ -86,11 +86,16 @@ public class SecurityConfig {
 
 
 
-//            // 로그인 해야지 가능
+//          // 게시판 관련 로그인 해야지 가능
             auth.requestMatchers("/api/board/WriteBoard").authenticated();   // 글 작성
             auth.requestMatchers("/api/board/update/**").authenticated();   // 글 수정
             auth.requestMatchers("/api/board/delete/**").authenticated();   // 글 삭제
             auth.requestMatchers("/api/board/image/upload").authenticated();    // CKEditor 텍스트
+
+            // 유저관련 로그인 해야지 가능
+            auth.requestMatchers("/myInfo/phone").authenticated();
+            auth.requestMatchers("/user").authenticated();
+            auth.requestMatchers("/myInfo/password").authenticated();
 
             // 2. Swagger 관련 경로 전체 허용 추가!
             auth.requestMatchers(
