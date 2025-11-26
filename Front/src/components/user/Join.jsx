@@ -9,7 +9,6 @@ const Join  = ()=>{
     const navigate = useNavigate();
     const [username ,setUsername] = useState()
     const [password ,setPassword] = useState()
-    const [rePassword, setRepassword] = useState()
     const [name, setName] = useState()
     const [phone, setPhone] = useState()
     // 이메일
@@ -29,7 +28,7 @@ const Join  = ()=>{
             .then(resp=>{
                 console.log(resp) // 요청을 해서 정상적인 응답이 오면 console에 반응
                 // 응답이 성공(status 200)일 경우 후처리 로직 추가
-                if (resp.status === 200) {
+                if (resp.data === "success" && resp.status === 200) {
                     alert("회원가입이 성공적으로 완료되었습니다!"); // 사용자 알림
                     navigate('/login');  // 3. 로그인 페이지로 이동 (예시: /login 경로로)
                 }
@@ -221,7 +220,7 @@ const Join  = ()=>{
                         <div className="bottom-border"></div>
                         <div className = "cancel-join">
                             <button>취소</button>
-                            <button id = "join_btn" type="submit">회원가입</button>
+                            <button id="join_btn" type="submit">회원가입</button>
                         </div>
                     </form>
                 </div>

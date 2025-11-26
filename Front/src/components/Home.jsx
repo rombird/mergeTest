@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import SalesAnalysis from "../components/SalesAnalysis";
 
 import "../css/home.css"
 
@@ -50,7 +51,7 @@ function Home(){
                                         <dl>
                                             <img src="/images/trend_img.png" alt="상권트렌드" />
                                             <dt>상권트렌드</dt>
-                                            <dd>요즘 뜨는 주요 상권에 대한 확인과 분석을 해보세요</dd>
+                                            <dd>요즘 뜨는 주요 상권에 대한 <br />확인과 분석을 해보세요</dd>
                                         </dl>
                                     
                                 </div>
@@ -59,7 +60,7 @@ function Home(){
                                         <dl>
                                             <img src="/images/girl_image.png" alt="나는 사장" />
                                             <dt>나는 사장</dt>
-                                            <dd>지금 내 가게 주변의 상권분석과 다양한 통계를 확인하세요</dd>
+                                            <dd>지금 내 가게 주변의 상권분석과 <br /> 다양한 통계를 확인하세요</dd>
                                         </dl>
                                 </div>
                                 <div id="box">
@@ -67,7 +68,7 @@ function Home(){
                                         <dl>
                                             <img src="/images/man_img.png" alt="나도 곧 사장" />
                                             <dt>나도 곧 사장</dt>
-                                            <dd>예비 사장님들을 위한 전략적이고 스마트한 창업분석</dd>
+                                            <dd>예비 사장님들을 위한 <br /> 전략적이고 스마트한 창업분석</dd>
                                         </dl>
                                 </div>
                                 {/* <button className="btn">&gt;</button> */}
@@ -83,9 +84,9 @@ function Home(){
                                     <h2>트렌드 정보</h2>
                                 </div>
                                 <div className="trendBox">
-                                    <div className="">차트 넣기</div>
-                                    <div className="">인기있는 상권</div>
-                                    <div className="">유행하는 창업 아이템</div>
+                                    <div>일단은 width : 450px, height : 400px로 잡아둠 </div>
+                                    <div><SalesAnalysis /></div>
+                                    <div>여기에 width를 지정하면 컴포넌트 가져왔을 때 css가 안먹힐 수 있으니까 css 가져올때 width, height 속성 제거하고 적용</div>
                                 </div>
                             </div>
                         </div>

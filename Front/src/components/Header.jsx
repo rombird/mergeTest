@@ -1,4 +1,4 @@
-import React, {createContext, useState, useEffect} from 'react'
+import React, {useState,useEffect} from 'react'
 import {Link, useNavigate} from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import "../css/common.css";
@@ -8,18 +8,15 @@ const Header = () => {
     const { isLoggedIn, logout, user } = useAuth(); 
     const navigate = useNavigate(); // useNavigate 훅 초기화
 
-    console.log("유저정보: {}", user);
     // 로그아웃 처리 함수
     const handleLogout = async (e) => {
-        // 폼의 기본 동작 방지 (Link 대신 button/onClick을 사용할 경우 불필요하지만 습관적으로 체크)
-        e.preventDefault(); 
+        e.preventDefault(); // 폼의 기본 동작 방지 (Link 대신 button/onClick을 사용할 경우 불필요하지만 습관적으로 체크)
         await logout(); // AuthContext의 logout 함수 실행 (서버 측 로그아웃 처리)
-        alert("로그아웃이 완료되었습니다."); // 알림창 표시
-        navigate('/'); // 메인 페이지로 이동 (경로가 메인 페이지인 / 로 가정)
+        alert("로그아웃이 완료되었습니다.");  // 알림창 표시(실행흐름을 정지시키기때문에 나중에 처리) -> AuthContext 파일에서 logout 작업을 했기 때문에 OK
+        navigate('/'); // 메인 페이지로 이동
     };
 
-    
-    const displayUsername = user ? user.name : '';
+    const displayUsername = user ? user.username : '';
 
     return(
         <>
@@ -29,15 +26,15 @@ const Header = () => {
                         <ul className="topNav">
                             {isLoggedIn ? (
                                 // 로그인 상태
-                                <>
+                                <>  
                                     <li className="topNavli">
-                                        <a className="logout" to="#void" >{displayUsername}님</a>
+                                        <Link className="username-check" to="" >{displayUsername}님</Link>
                                     </li>
                                     <li className="topNavli">
                                         <Link className="mypage" to="/mypage" ><img className="imgMypage" src="/images/login.svg" alt="마이페이지"/>마이페이지</Link>
                                     </li>
                                     <li className="topNavli">
-                                        <a className="logout" to="/logout" onClick={handleLogout}><img className="imgLogout" src="/images/join.svg" alt="로그아웃"/>로그아웃</a>
+                                        <Link className="logout" to="/logout" onClick={handleLogout}><img className="imgLogout" src="/images/join.svg" alt="로그아웃"/>로그아웃</Link>
                                     </li>
                                 </>
                             ) : ( 

@@ -1,0 +1,197 @@
+
+.analysis-widget-container {
+    padding: 20px 30px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    width: 450px;
+    min-width: 450px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.error-state {
+    border-color: red;
+    color: #cc0000;
+}
+
+.loading-state {
+    text-align: center;
+    color: #666;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.no-data-state{
+    padding: 20px;
+    text-align: center; 
+    /* min-height: 300px; */
+}
+.no-data-state>p{
+    font-size: 1.1em;
+    color: #555;
+    font-family:"kopu";
+}
+
+.container-below-contents{ /*회색박스내의 모든 요소들에 대한 위치조정 가능*/
+    margin-top: 5%;
+}
+
+.analysis-widget-container h2 {
+    color: #333;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 6px;
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 1.1em;
+    width: 100%;
+    font-family:"kopu";
+}
+
+.dropdown-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.dropdown-row select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 0.8em;
+    font-family:"kopume";
+    cursor: pointer;
+    background-color: white;
+}
+
+.sales-card-box {
+    background-color: white;
+    padding: 14px;
+    border-radius: 8px;
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-header-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.card-header-info h3 {
+    font-size: 1.1em;
+    font-weight: bold;
+    font-family:"kopu";
+    color: #1a1a1a;
+    border-bottom: none;
+    margin: 0;
+}
+
+.card-header-info p {
+    font-size: 0.6em;
+    font-family:"kopume";
+    color: #666;
+    margin: 0;
+}
+
+.card-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0 18px 0;
+    text-align: center;
+}
+
+.change-card {
+    padding: 12px 8px;
+    border-radius: 8px;
+    color: white;
+    width: 90px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.change-card p {
+    font-size: 0.55em;
+    font-family:"kopume";
+    margin-bottom: 2px;
+}
+
+.change-card h2 {
+    font-size: 1.1em;
+    font-family:"kopume";
+    margin: 0;
+    font-weight: 700;
+}
+
+.current-sales-card {
+    width: 130px;
+    padding: 8px;
+}
+
+.current-sales-card p {
+    font-size: 0.75em;
+    font-family:"kopume";
+    color: #888;
+    margin: 0 0 4px 0;
+}
+
+.current-sales-card h1 {
+    font-size: 1.8em;
+    font-family:"kopu";
+    font-weight: 800;
+    color: #007bff;
+    margin: 0;
+}
+
+.change-positive {
+    background-color: #ff3366;
+}
+
+.change-negative {
+    background-color: #3399ff;
+}
+
+.card-footer-info {
+    padding-top: 10px;
+    border-top: 1px solid #e9ecef;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.footer-data-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 0.78em;
+}
+
+.footer-label {
+    color: #666;
+    font-weight: 500;
+    font-family:"kopume";
+    text-align: right;
+    width: 90px;
+}
+
+.footer-value {
+    color: #1a1a1a;
+    font-weight: 700;
+    font-family:"kopume";
+    font-size: 0.9em;
+    text-align: right;
+    width: 75px;
+    margin-left: 15px;
+}
