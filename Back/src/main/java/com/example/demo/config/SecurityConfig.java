@@ -74,7 +74,7 @@ public class SecurityConfig {
 		http.authorizeHttpRequests((auth)->{
 			auth.requestMatchers("/",
                                         "/join",
-                                        "/login",
+                                        "/login", // 인증 없이 접근 허용
                                         "/validate",
                                         "/oauth2/**",
                                         "/login/oauth2/**",
@@ -84,18 +84,23 @@ public class SecurityConfig {
                                         "/api/board/download/**"
             ).permitAll();
 
-
-
-//          // 게시판 관련 로그인 해야지 가능
-            auth.requestMatchers("/api/board/WriteBoard").authenticated();   // 글 작성
-            auth.requestMatchers("/api/board/update/**").authenticated();   // 글 수정
-            auth.requestMatchers("/api/board/delete/**").authenticated();   // 글 삭제
-            auth.requestMatchers("/api/board/image/upload").authenticated();    // CKEditor 텍스트
-
             // 유저관련 로그인 해야지 가능
             auth.requestMatchers("/myInfo/phone").authenticated();
             auth.requestMatchers("/user").authenticated();
             auth.requestMatchers("/myInfo/password").authenticated();
+
+            // 게시판 API 권한 설정
+            // 로그인 없어도 OK
+            auth.requestMatchers("/api/board/paging").permitAll();  // 게시판 조회
+            auth.requestMatchers("/api/board/{id}").permitAll();    // 상세 조회
+            auth.requestMatchers("/api/board/download/**").permitAll(); // 첨부파일 다운로드
+
+            // 로그인 해야지 가능
+            auth.requestMatchers("/api/board/WriteBoard").authenticated();   // 글 작성
+            auth.requestMatchers("/api/board/update/**").authenticated();   // 글 수정
+            auth.requestMatchers("/api/board/delete/**").authenticated();   // 글 삭제
+            auth.requestMatchers("/api/board/image/upload").authenticated();    // CKEditor 텍스트
+            auth.requestMatchers("/api/comment/save").authenticated(); //
 
             // 2. Swagger 관련 경로 전체 허용 추가!
             auth.requestMatchers(
@@ -114,6 +119,9 @@ public class SecurityConfig {
 		//-----------------------------------------------------
 		// [수정] 로그인(직접처리 - UserRestController)
         // 리액트에서 넘길거기때문에 disable설정이면 된다
+
+        // 기본 로그인 폼 및 처리 필터를 사용하지않겠다(JWT 방식을 사용하므로 올바른 설정입니다)
+
 		//-----------------------------------------------------
 		http.formLogin((login)->{
 			login.disable();

@@ -227,6 +227,17 @@ public class apiBoardController {
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
     // ################################################################
     // 게시글 수정
     // ################################################################
@@ -288,24 +299,5 @@ public class apiBoardController {
 
 
 
-//    @GetMapping("/update/{id}")
-//    public String updateForm(@PathVariable Long id, Model model){
-//        BoardDto boardDto = boardService.findById(id);
-//        model.addAttribute("boardUpdate", boardDto);
-//
-//        return "board/update";
-//    }
-//
-//    @Operation(summary = "boardUpdatePost", description = "게시글 수정 포스팅")
-//    @PostMapping("/board/update")
-//    public String update(@ModelAttribute BoardDto boardDto, Model model){
-//        log.info("post/ board/update... 게시판 업데이트 포스팅");
-//
-//        BoardDto board = boardService.update(boardDto);
-//        model.addAttribute("board", board);
-//
-//        System.out.println("contents = " + boardDto.getBoardContents());
-//        return "redirect:/board/" + boardDto.getId(); // 게시글 상세페이지로 이동
-//    }
 
 }
