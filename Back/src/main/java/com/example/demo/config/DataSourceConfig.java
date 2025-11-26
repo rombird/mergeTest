@@ -1,10 +1,8 @@
 package com.example.demo.config;
 
-
-import org.springframework.beans.factory.annotation.Value;
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 public class DataSourceConfig {
