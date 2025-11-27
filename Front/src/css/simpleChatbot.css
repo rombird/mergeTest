@@ -1,0 +1,147 @@
+/* 챗봇 패널의 기본 위치 및 크기 */
+.chat-panel {
+    position: fixed; 
+    bottom: 100px; 
+    right: 24px;
+    width: min(420px, 92vw); 
+    height: 520px; 
+    background: #fff;
+    box-shadow: 0 22px 48px rgba(15, 23, 42, 0.2);
+    border: 1px solid rgba(45, 55, 72, 0.12);
+    
+    /* Flexbox 설정 */
+    display: flex; 
+    flex-direction: column; 
+    overflow: hidden;
+    
+    /* 숨겨진 초기 상태 */
+    opacity: 0; 
+    transform: translateY(20px); 
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 999; /* 런처 버튼보다 약간 낮거나 높게 설정 */
+}
+
+/* 챗봇이 보일 때 적용되는 스타일 */
+.chat-panel.visible { 
+    opacity: 1; 
+    transform: translateY(0); 
+    pointer-events: auto; 
+}
+
+/* 헤더 스타일 */
+.chat-header {
+    padding: 18px 20px; 
+    border-bottom: 1px solid rgba(226,232,240,0.9);
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+}
+.chat-header-title { 
+    font-weight: 600; 
+    font-size: 1rem; 
+    color: #1a202c; /* text-primary */
+}
+.chat-close { 
+    background: none; 
+    border: none; 
+    color: #4a5568; /* text-secondary */
+    font-size: 1.2rem; 
+    cursor: pointer; 
+}
+
+/* 메시지 본문 영역 */
+.chat-body {
+    flex: 1; 
+    padding: 18px 20px 12px;
+    display: flex; 
+    flex-direction: column; 
+    gap: 14px; 
+    overflow-y: auto;
+}
+
+/* 메시지 공통 스타일 */
+.chat-message {
+    padding: 14px 18px; 
+    max-width: 85%; 
+    line-height: 1.5; 
+    font-size: 0.9rem;
+    word-break: break-word; 
+    overflow-wrap: anywhere; 
+    white-space: pre-wrap;
+}
+
+/* 봇 메시지 */
+.chat-message.bot {
+    align-self: flex-start; 
+    background: rgba(37,99,235,0.1); /* accent 기반 */
+    border: 1px solid rgba(37,99,235,0.2); 
+    position: relative; 
+    padding-top: 26px;
+}
+/* 사용자 메시지 */
+.chat-message.user {
+    align-self: flex-end; 
+    background: rgba(255,111,97,0.12); 
+    border: 1px solid rgba(255,111,97,0.3);
+}
+/* 봇 뱃지 */
+.chat-message .bot-badge {
+    position: absolute; 
+    top: 8px; 
+    left: 18px; 
+    font-size: 0.7rem; 
+    font-weight: 600;
+    color: rgba(37,99,235,0.85); 
+    background: rgba(37,99,235,0.18);
+    border-radius: 999px; 
+    padding: 2px 8px; 
+}
+
+/* 로딩 애니메이션 (Optional: '처리 중...' 텍스트 대신 사용) */
+.loading-dots:after {
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: bottom;
+    animation: loading-dots 1s steps(4) infinite;
+    content: "...."; /* 4단계 애니메이션 */
+}
+
+@keyframes loading-dots {
+    to { margin-left: 1em; } /* 실제 닷 애니메이션은 CSS로 더 정교하게 구현 가능 */
+}
+
+
+/* 입력 영역 */
+.chat-input-area {
+    padding: 16px 20px; 
+    border-top: 1px solid rgba(226,232,240,0.9);
+    display: flex; 
+    gap: 10px; 
+    background: #f8fafc;
+}
+.chat-input {
+    flex: 1; 
+    padding: 12px 14px; 
+    border: 1px solid rgba(203,213,225,0.9);
+    background: #fff; 
+    color: #1a202c; /* text-primary */
+    font-size: 0.93rem; 
+    outline: none;
+}
+.chat-send { 
+    padding: 12px 18px; 
+    border: none; 
+    background: #2563eb; /* accent */
+    color: #fff; 
+    font-weight: 600; 
+    cursor: pointer; 
+}
+
+/* 미디어 쿼리 (모바일 대응) */
+@media (max-width: 520px) {
+    .chat-panel { 
+        width: calc(100% - 32px); 
+        right: 16px; 
+    }
+}

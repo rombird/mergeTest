@@ -4,7 +4,7 @@ import SalesAnalysis from "../components/SalesAnalysis";
 
 import "../css/home.css"
 
-function Home(){
+function Home() {
     return(
         <>
             <main>

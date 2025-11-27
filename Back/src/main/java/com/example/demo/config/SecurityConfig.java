@@ -89,6 +89,10 @@ public class SecurityConfig {
             auth.requestMatchers("/user").authenticated();
             auth.requestMatchers("/myInfo/password").authenticated();
 
+            // 챗봇 관련
+            // 심플 챗봇, 로그인 해야지 가능
+            auth.requestMatchers("/api/v1/simple-chat").permitAll();
+
             // 게시판 API 권한 설정
             // 로그인 없어도 OK
             auth.requestMatchers("/api/board/paging").permitAll();  // 게시판 조회
