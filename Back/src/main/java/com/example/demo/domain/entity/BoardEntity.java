@@ -22,22 +22,22 @@ public class BoardEntity extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 자동으로 ID 생성
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "boardWriter", nullable = false)
     private String boardWriter;
 
-    @Column(nullable = false)
+    @Column(name = "bardPass", nullable = false)
     private String boardPass;
 
-    @Column(nullable = false)
+    @Column(name = "boardTitle", nullable = false)
     private String boardTitle;
 
-    @Column(nullable = false, length = 500)
+    @Column(name = "boardContents", nullable = false, length = 500)
     private String boardContents;
 
-    @Column
+    @Column(name = "boardHits")
     private int boardHits;
 
-    @Column
+    @Column(name = "fileAttached")
     private Integer fileAttached; // 1 or 0
 
 
