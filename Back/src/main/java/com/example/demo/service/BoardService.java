@@ -117,7 +117,7 @@ public class BoardService {
                 savedFileEntityList.add(boardFileEntity);
             }
 
-            // 이렇게 하면 toBoardDto 호출 시 DB 접근 없이 메모리의 파일 리스트를 사용합니다.
+            // 이렇게 하면 toBoardDto 호출 시 DB 접근 없이 메모리의 파일 리스트를 사용
             boardEntity.setBoardFileEntityList(savedFileEntityList);
 
             // c. DTO 변환 및 반환

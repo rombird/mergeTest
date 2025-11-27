@@ -88,7 +88,7 @@ public class apiBoardController {
 
         log.info("POST /api/board/writeBoard 게시글 작성 요청: {}", boardDto.getBoardTitle());
 
-        // 💡 3. 수신한 파일을 DTO의 필드에 수동으로 설정
+        // 3. 수신한 파일을 DTO의 필드에 수동으로 설정
         // DTO에 List<MultipartFile> fileUpload; 필드가 있으므로 사용 가능
         if (fileUploads != null && !fileUploads.isEmpty()) {
             boardDto.setFileUpload(fileUploads);
