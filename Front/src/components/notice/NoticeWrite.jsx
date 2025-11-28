@@ -14,7 +14,7 @@ const NoticeWrite = () => {
                 </div>
 
                 <div className="write-space">
-                    <form onSubmit={handleSubmit} encType="multipart/form-data" >
+                    <form encType="multipart/form-data" >
                         <div className="label-and-writeArea">
                             <div className="label-area">
                                 <div>제목</div>
