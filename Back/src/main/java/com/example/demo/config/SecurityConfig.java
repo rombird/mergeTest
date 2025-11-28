@@ -106,9 +106,12 @@ public class SecurityConfig {
             auth.requestMatchers("/api/board/image/upload").authenticated();    // CKEditor 텍스트
             auth.requestMatchers("/api/comment/save").authenticated(); //
 
+            // 차트 보는 거 로그인 허용할까 말까
+//            auth.requestMatchers("/api/sales/summary").permitAll();
+
 
             // 공지사항 보는 거 로그인 안해도 가능
-
+            auth.requestMatchers("/api/notice/paging").permitAll();
 
             // 공지사항 글 쓰기, 관리자만 가능
             auth.requestMatchers("/api/notice/save").hasAnyRole("ADMIN"); //

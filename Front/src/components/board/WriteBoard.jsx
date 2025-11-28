@@ -247,7 +247,7 @@ const WriteBoard = () => {
             
             if (response.status === 200 || response.status === 201) {
                 alert(isEditMode ? "게시글이 수정되었습니다." : "게시글이 작성되었습니다.");
-                navigate(isEditMode ? `/board/${id}` : 'api/board/paging');  // 게시글 목록 페이지로 이동
+                navigate(isEditMode ? `/board/${id}` : '/api/board/paging');  // 게시글 목록 페이지로 이동
             }
         } catch (error) {
             console.error("글 작성 실패:", error);

@@ -178,6 +178,8 @@ public class apiBoardController {
         }
     }
 
+
+    // 삭제
     @Operation(summary = "boardDelete", description = "게시글 삭제")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id){
@@ -227,17 +229,6 @@ public class apiBoardController {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
     // ################################################################
     // 게시글 수정
     // ################################################################
@@ -285,17 +276,6 @@ public class apiBoardController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

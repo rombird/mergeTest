@@ -13,6 +13,5 @@ public interface NoticeRepository extends JpaRepository<NoticeEntity, Long> {
     // 게시글 조회수를 올리기 위한 repository에서 notice_hits 하나씩 올리는 코드
     @Modifying
     @Query(value = "update NoticeEntity n set n.noticeHits=n.noticeHits+1 where n.id=:id")
-    void noticeUpdateHits(@Param("id") Long id);
-
+    void updateHits(@Param("id") Long id);
 }

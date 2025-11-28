@@ -15,6 +15,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import NoticePaging from './components/notice/NoticePaging';
 import NoticeWrite from './components/notice/NoticeWrite';
+import NoticeDetail from './components/notice/NoticeDetail';
 
 function App() {
   return (
@@ -38,7 +39,8 @@ function App() {
 
                 {/* 공지사항 */}
                 <Route path="/api/notices" element={<NoticePaging />} />
-                <Route path="/api/notice/noticeWrite" element={<NoticeWrite />} />
+                <Route path="/notice/noticeWrite" element={<NoticeWrite />} />
+                <Route path="/notice/:id" element={<NoticeDetail />} />
               </Routes>
             
             <Footer />

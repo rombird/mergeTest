@@ -234,4 +234,4 @@ const NoticeDetail = () => {
     );
 }
 
-export default BoardDetail;
+export default NoticeDetail;

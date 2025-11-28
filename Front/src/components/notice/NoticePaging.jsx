@@ -1,7 +1,7 @@
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import React, {useEffect, useState, useCallback} from 'react';
 import "../../context/AuthContext";
-import "../../api/axiosConfig";
+import api from "../../api/axiosConfig";
 import moment from 'moment';
 
 import "../../css/common.css";
@@ -10,6 +10,30 @@ import "../../css/noticePaging.css";
 const NoticePaging = () => {
     const navigate = useNavigate(); 
     const [searchParams] = useSearchParams();
+    const [userInfo, setUserInfo] = useState(null);
+    const[isAdmin, setIsAdmin] = useState(false);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try{
+                const response = await api.get('/user');
+                setUserInfo(response.data);
+
+                // role이 ADMIN인지 체크
+                if(response.data.role === 'ADMIN'){
+                    setIsAdmin(true);
+                }
+            }catch(error){
+                console.error("회원정보 조회 실패", error);
+            }
+        };
+        fetchUser();
+    }, []);
+
+    const goToWrite = () => {
+        navigate('/notice/noticeWrite');
+    };
+
 
     // 1. 관리자 권한 확인 (AuthContext에서 사용자 역할(role)을 가져와야 합니다.)
     // const { userRole } = useAuth();
@@ -29,10 +53,10 @@ const NoticePaging = () => {
     //     fetchNotices();
     // }, []);
 
-    const handleRegisterClick = () => {
-        // 관리자만 접근 가능한 작성 페이지 경로
-        navigate('/notice/write'); 
-    };
+    // const handleRegisterClick = () => {
+    //     // 관리자만 접근 가능한 작성 페이지 경로
+    //     navigate('/notice/write'); 
+    // };
 
     return(
         <>
@@ -137,7 +161,9 @@ const NoticePaging = () => {
                 <div className="notice-bottom layoutCenter">
                     <div className="notice-paging"></div>
                     <div className="notice-btn">
-                        <button className="notice-create">공지등록</button>
+                        {isAdmin && (
+                            <button onClick= {goToWrite} className="notice-create">공지등록</button>
+                        )}
                     </div>
                 </div>
 
