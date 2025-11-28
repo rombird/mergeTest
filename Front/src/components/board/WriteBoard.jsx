@@ -20,8 +20,7 @@ class MyUploadAdapter{
                 const data = new FormData();
                 data.append('upload', file);
 
-                // CKEditor 이미지 업로드는 토큰 재발급 로직이 불필요할 수 있어 axios를 유지하거나,
-                // api 인스턴스를 사용하려면 URL을 상대경로로 바꿔야 합니다. 
+                // CKEditor 이미지 업로드는 토큰 재발급 로직이 불필요할 수 있어 axios를 유지하거나, 
                 // 여기서는 기존 코드를 유지하여 axios를 사용합니다.
                 return axios.post(this.url, data, {
                     headers: {
@@ -248,7 +247,7 @@ const WriteBoard = () => {
             
             if (response.status === 200 || response.status === 201) {
                 alert(isEditMode ? "게시글이 수정되었습니다." : "게시글이 작성되었습니다.");
-                navigate(isEditMode ? `/api/board/${id}` : '/api/board/paging');  // 게시글 목록 페이지로 이동
+                navigate(isEditMode ? `/board/${id}` : 'api/board/paging');  // 게시글 목록 페이지로 이동
             }
         } catch (error) {
             console.error("글 작성 실패:", error);

@@ -90,7 +90,7 @@ public class SecurityConfig {
             auth.requestMatchers("/myInfo/password").authenticated();
 
             // 챗봇 관련
-            // 심플 챗봇, 로그인 해야지 가능
+            // 심플 챗봇, 누구든지 가능
             auth.requestMatchers("/api/v1/simple-chat").permitAll();
 
             // 게시판 API 권한 설정
@@ -99,12 +99,22 @@ public class SecurityConfig {
             auth.requestMatchers("/api/board/{id}").permitAll();    // 상세 조회
             auth.requestMatchers("/api/board/download/**").permitAll(); // 첨부파일 다운로드
 
-            // 로그인 해야지 가능
+            // 게시판, 로그인 해야지 가능
             auth.requestMatchers("/api/board/WriteBoard").authenticated();   // 글 작성
             auth.requestMatchers("/api/board/update/**").authenticated();   // 글 수정
             auth.requestMatchers("/api/board/delete/**").authenticated();   // 글 삭제
             auth.requestMatchers("/api/board/image/upload").authenticated();    // CKEditor 텍스트
             auth.requestMatchers("/api/comment/save").authenticated(); //
+
+
+            // 공지사항 보는 거 로그인 안해도 가능
+
+
+            // 공지사항 글 쓰기, 관리자만 가능
+            auth.requestMatchers("/api/notice/save").hasAnyRole("ADMIN"); //
+
+
+
 
             // 2. Swagger 관련 경로 전체 허용 추가!
             auth.requestMatchers(

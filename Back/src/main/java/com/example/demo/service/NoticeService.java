@@ -15,6 +15,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Safelist;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -111,5 +115,34 @@ public class NoticeService {
         };
 
         return noticeDtoList;
+    }
+
+
+    // 페이징 기능
+    @Transactional
+    public Page<NoticeDto> paging(Pageable pageable){
+        int page = pageable.getPageNumber() - 1;
+        int pageLimit = 10;  // 한 페이지에 보여줄 글 개수
+
+        // 한 페이지당 pageLimit만큼 글을 보여주고 정렬 기준은 id 기준으로 내림차순 정렬
+        // noticeEntities -> 스프링부트JPA에서 제공하는 듯
+        // page 위치에 있는 값은 0부터 시작하니까 page변수 설정 시 -1 해놓음
+        Page<NoticeEntity> noticeEntities =
+                noticeRepository.findAll(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "id")));
+        // page -> 몇 페이지?, pageLimit -> 한 페이지에 몇 개?, Sort.By -> 정렬기준은?
+
+        // 필요한 정보들
+        System.out.println("noticeEntities.getContent(): " + noticeEntities.getContent());  // 요청 페이지에 해당하는 글들
+        System.out.println("noticeEntities.getTotalElements(): " + noticeEntities.getTotalElements()); // 전체 글 갯수
+        System.out.println("noticeEntities.getNumber(): " + noticeEntities.getNumber()); // DB로 요청한 페이지 번호
+        System.out.println("noticeEntities.getTotalPages(): " + noticeEntities.getTotalPages()); // 전체 페이지 갯수
+        System.out.println("noticeEntities.getSize(): " + noticeEntities.getSize()); // 한 페이지에 보여지는 글 갯수
+        System.out.println("noticeEntities.hasPrevious(): " + noticeEntities.hasPrevious()); // 이전 페이지 존재 여부
+        System.out.println("noticeEntities.isFirst()" + noticeEntities.isFirst()); // 첫 페이지 여부
+        System.out.println("noticeEntities.isLast()" + noticeEntities.isLast());    // 마지막 페이지 여부
+
+        // 목록에서 보일 것들 -> id, writer, title, hits, createdTime
+        Page<NoticeDto> noticeDtos = noticeEntities.map(notice -> new NoticeDto(notice.getId(), notice.getNoticeWriter(), notice.getNoticeTitle(), notice.getNoticeHits(), notice.getCreatedTime()));  // Page 객체에서 제공하는 map메서드 -> 안의 거를 하나씩 꺼내는 역할
+        return noticeDtos;
     }
 }
