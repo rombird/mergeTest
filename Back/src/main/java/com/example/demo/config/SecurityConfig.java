@@ -113,8 +113,12 @@ public class SecurityConfig {
             // 공지사항 보는 거 로그인 안해도 가능
             auth.requestMatchers("/api/notice/paging").permitAll();
 
+
+            // 공지사항 업데이트 되는 거 확인하면 바꿔야지
+            auth.requestMatchers("/api/notice/update/**").permitAll();
+
             // 공지사항 글 쓰기, 관리자만 가능
-            auth.requestMatchers("/api/notice/save").hasAnyRole("ADMIN"); //
+            auth.requestMatchers("/api/notice/save").hasAuthority("ADMIN"); //
 
 
 

@@ -47,12 +47,12 @@ public class apiNoticeController {
     private String CKEditorImageDir;
 
     @Operation(summary = "Notice'sPagingList", description = "공지사항 목록 및 페이징 정보")
-    @GetMapping("/save")
+    @PostMapping("/save")
     public ResponseEntity<NoticeDto> save(// 1. 폼 데이터 (제목, 글쓴이, 내용 등)를 DTO에 바인딩
                                           @ModelAttribute NoticeDto noticeDto,
                                           // 2. 파일 데이터를 "fileUpload" 키로 명시적으로 받음
                                           @RequestPart(value = "noticeFileUpload", required = false) List<MultipartFile> noticeFileUploads) throws IOException {
-
+        log.info("post/ api/notice/save , 공지사항 저장");
         // 수신한 파일을 DTO의 필드에 수동으로 설정
         // DTO에 List<MultipartFile> fileUpload; 필드가 있으므로 사용 가능
         if (noticeFileUploads != null && !noticeFileUploads.isEmpty()) {
