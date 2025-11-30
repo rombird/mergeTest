@@ -41,6 +41,7 @@ function App() {
                 <Route path="/api/notices" element={<NoticePaging />} />
                 <Route path="/notice/noticeWrite" element={<NoticeWrite />} />
                 <Route path="/notice/:id" element={<NoticeDetail />} />
+                <Route path="/notice/update/:id" element={<NoticeWrite />} />
               </Routes>
             
             <Footer />

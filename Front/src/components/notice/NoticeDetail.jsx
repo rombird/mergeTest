@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useNavigate, Link, useParams } from 'react-router-dom';
+import { useNavigate, Link, useParams, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { useAuth } from '../../context/AuthContext';
 import moment from 'moment'; 
@@ -10,16 +10,18 @@ import "../../css/boardDetail.css";
 const NoticeDetail = () => {
     const { id: noticeId } = useParams(); // url경로가 /notice/:id
     const navigate = useNavigate(); // 페이지 이동을 위한 함수
-    const { user, isLoggedIn } = useAuth();
-
+    const { user, isLoggedIn } = useAuth(); // 로그인 상태 및 사용자 정보 활요
+    const [searchParams] =  useSearchParams();
+    
     console.log('게시글 ID:', noticeId);
+
     // 상태 관리
     const [notice, setNotice] = useState(null); // 게시글 데이터 (NoticeDto)
-    const [commentList, setCommentList] = useState([]); // 댓글은 배열로
-    const [commentInput, setCommentInput] = useState({
-        writer: '',
-        content: ''
-    });
+    // const [commentList, setCommentList] = useState([]); // 댓글은 배열로
+    // const [commentInput, setCommentInput] = useState({
+    //     writer: '',
+    //     content: ''
+    // });
 
     const [page, setPage] = useState(1);    // 목록으로 돌아갈 때 필요한 페이지 정보
  
@@ -33,18 +35,20 @@ const NoticeDetail = () => {
                 const response = await axios.get(`http://localhost:8090/api/notice/${noticeId}`);
                 // 응답 데이터 구조: NoticeDetailResponse {noticeDto, commentDtoList}
 
-                const noticeData = response.data.notice;
-                const commentsData = response.data.commentDtoList || [];
+                console.log("어떻게 들어오는거야?" , response.data);
+
+                const noticeData = response.data.noticeDto;
+                // const commentsData = response.data.commentDtoList || [];
                 
                 console.log("게시글 정보:" , noticeData);
 
                 setNotice(noticeData);
-                setCommentList(commentsData);
+                // setCommentList(commentsData);
             }
             catch(error){
                 console.error(`게시글${noticeId} 조회 실패: `, error);
                 alert("게시글 정보를 불러오는데 실패 혹은 해당 게시글이 존재하지 않습니다");
-                navigate('/notice/paging');  // 실패시 게시글 목록페이지로 이동
+                navigate('/api/notices');  // 실패시 게시글 목록페이지로 이동
             }
         };
         fetchNoticeDetail();
@@ -52,15 +56,15 @@ const NoticeDetail = () => {
 
     // 댓글 작성
     // 댓글 입력 필드 변경 핸들러
-    const handleCommentInputChange = (e) => {
-        const{id, value} = e.target;
-        const stateKey = id === "comment-writer" ? "writer" : "content";
+    // const handleCommentInputChange = (e) => {
+    //     const{id, value} = e.target;
+    //     const stateKey = id === "comment-writer" ? "writer" : "content";
 
-        setCommentInput(prev => ({
-            ...prev,
-            [stateKey]: value
-        }));
-    };
+    //     setCommentInput(prev => ({
+    //         ...prev,
+    //         [stateKey]: value
+    //     }));
+    // };
 
     // // 댓글 작성 처리 (Post /comment/save)
     // const commentWrite = async () => {
@@ -109,7 +113,7 @@ const NoticeDetail = () => {
     // 페이지 이동 핸들러
     const listReq = () => {
         // 
-        navigate(`/api/notice/paging`);
+        navigate(`/api/notices`);
     };
 
     // 수정 페이지 이동
@@ -128,7 +132,7 @@ const NoticeDetail = () => {
             
             // 2. 성공 시 알림 및 목록으로 이동
             alert("게시글이 삭제되었습니다");
-            navigate(`/notice/Paging`);
+            navigate('/api/notices');
         
         }catch(error){
             console.error("삭제 실패: ", error);
@@ -136,10 +140,15 @@ const NoticeDetail = () => {
         }
     }
 };
-    // 로딩 처리
-    if (!notice){
-        return <div>게시글 데이터를 불러오는 중입니다...</div>
-    }
+
+// 작성자/ 관리자 확인 로직
+// DMIN 권한을 가진 사용자에게만 수정/삭제 버튼을 보여줄거야 
+const isAdminUser = user && (user.role === 'ADMIN' || user.roleType === 'ADMIN');
+
+// 로딩 처리
+if (!notice){
+    return <div>공지사항 데이터를 불러오는 중입니다...</div>
+}
 
     return (
         <div className="boardDetail layoutCenter">
@@ -161,19 +170,21 @@ const NoticeDetail = () => {
                 <div className="date-hit">
                     <div className="date">
                         <img src="../../images/clock.png" alt="시계사진넣기" />
-                        <p>{notice.noticeCreateTime}</p>
+                        <p>{moment(notice.noticeCreateTime).format('YYYY-MM-DD HH:mm:ss')}</p>
                     </div>
                     <div className="hit">
                         <img src="../../images/read.png" alt="조회" />
-                        <p>{notice.noticeHits}</p>
+                        <p>조회수: {notice.noticeHits}</p>
                     </div>
                 </div>
                 <div className="content-line"></div>
                 <div className="contentkey">
-                    <div dangerouslySetInnerHTML={{ __html: notice.noticeContents }} />
+                    <div style={{whiteSpace: 'pre-wrap'}}>{notice.noticeContents}</div>
                 </div>
+
+                {/* 파일 첨부 목록 표시 */}
                 <div className="fileadd">
-                    {notice.fileAttached === 1 && notice.noticeFileDtoList && notice.noticeFileDtoList.length > 0 && (
+                    {notice.noticeFileAttached === 1 && notice.noticeFileDtoList && notice.noticeFileDtoList.length > 0 && (
                         notice.noticeFileDtoList.map((file, index) => (
                                     <div key={index} className="filename">
                                         <p>첨부파일 </p>
@@ -191,8 +202,12 @@ const NoticeDetail = () => {
             </div>
             <div className="action-btn">
                 <button className="listback-btn" onClick={listReq}>목록</button>
-                <button className="update-btn" onClick={updateReq}>수정</button>
-                <button className="delete-btn" onClick={deleteReq}>삭제</button>
+                {isAdminUser && (
+                    <>
+                        <button className="update-btn" onClick={updateReq}>수정</button>
+                        <button className="delete-btn" onClick={deleteReq}>삭제</button>    
+                    </>
+                )}
             </div>
             {/* <div className="comment">
                 <h4>댓글 작성</h4>

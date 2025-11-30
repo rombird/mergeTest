@@ -70,7 +70,7 @@ const NoticeWrite = () => {
 
     // 파일 삭제 함수
     const deleteFile = (fileName, fileSize) => {
-        setUploadedFiles(prevFiles => { // ✨ setUploadedFiles로 수정
+        setUploadedFiles(prevFiles => { // setUploadedFiles로 수정
         return prevFiles.filter(f => !(f.name === fileName && f.size === fileSize));
         });
     };
@@ -118,7 +118,8 @@ const NoticeWrite = () => {
         if(isEditMode){
             axios.get(`http://localhost:8090/api/notice/${id}`)
             .then(response => {
-                const data = response.data.notice;
+                console.log("뭐가 들어오는가? ", response.data);
+                const data = response.data.noticeDto;
                 if(!data) throw new Error("공지사항 데이터가 없습니다");
 
                 setNoticeTitle(data.noticeTitle);   // 제목 설정
@@ -204,7 +205,7 @@ const NoticeWrite = () => {
 
             if (response.status === 200 || response.status){
                 alert(isEditMode ? "공지사항이 수정되었습니다." : "공지사항이 작성되었습니다");
-                navigate(isEditMode ? `notice/${id}` : "api/notices");
+                navigate(isEditMode ? `/notice/${id}` : "/api/notices");
             }
         }catch(error){
             console.error("공지사항 처리 실패", error);
