@@ -35,7 +35,7 @@ const NoticeDetail = () => {
                 const response = await axios.get(`http://localhost:8090/api/notice/${noticeId}`);
                 // 응답 데이터 구조: NoticeDetailResponse {noticeDto, commentDtoList}
 
-                console.log("어떻게 들어오는거야?" , response.data);
+                // console.log("어떻게 들어오는거야?" , response.data);
 
                 const noticeData = response.data.noticeDto;
                 // const commentsData = response.data.commentDtoList || [];

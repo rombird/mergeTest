@@ -44,6 +44,9 @@ public class NoticeService {
     @Value("${noticeFile.dir}")       // 파일 저장 경로
     private String noticeFileDir;
 
+    @Value("${noticeCKEditor.image}")
+    private String noticeCKEditorImageDir;
+
     public NoticeService(NoticeRepository boardRepository, NoticeFileRepository noticeFileRepository) {
         this.noticeRepository = boardRepository;
         this.noticeFileRepository = noticeFileRepository;
@@ -173,7 +176,7 @@ public class NoticeService {
                 .orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없습니다."));
 
 
-        // 3. 텍스트 정보 업데이트 (제목, 내용)
+        // 텍스트 정보 업데이트 (제목, 내용)
         // 불필요한 HTML 태그 제거
         if (noticeDto.getNoticeContents() != null) {
             String cleanText = Jsoup.clean(noticeDto.getNoticeContents(), Safelist.basicWithImages());
@@ -181,7 +184,7 @@ public class NoticeService {
             noticeEntity.updateText(noticeDto.getNoticeTitle(), cleanText);
         }
 
-        // 4. 파일 삭제 처리
+        // 파일 삭제 처리
         if (deleteFileIds != null && !deleteFileIds.isEmpty()) {
             for (Long fileId : deleteFileIds) {
                 // DB에서 파일 정보 조회
@@ -191,10 +194,8 @@ public class NoticeService {
                     // 로컬 디스크에서 파일 삭제
                     String savePath = noticeFileDir + fileEntity.getNoticeStoredFilename();
                     File file = new File(savePath);
-                    if (file.exists()) {
-                        if(!file.delete()){
-                            log.error("파일 삭제 실패: {}", savePath);
-                        }
+                    if (file.exists() && !file.delete()) {
+                        log.error("파일 삭제 실패: {}", savePath);
                     }
                     // DB에서 파일 데이터 삭제
                     noticeFileRepository.delete(fileEntity);

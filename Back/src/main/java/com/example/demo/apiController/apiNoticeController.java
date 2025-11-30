@@ -40,11 +40,11 @@ public class apiNoticeController {
 
 
     // 파일 저장 경로
-    @Value("${file.dir}")       // 파일 저장 경로
-    private String fileDir;
+    @Value("${noticeFile.dir}")       // 파일 저장 경로
+    private String noticeFileDir;
 
-    @Value("${CKEditor.image}")
-    private String CKEditorImageDir;
+    @Value("${noticeCKEditor.image}")
+    private String noticeCKEditorImageDir;
 
     @Operation(summary = "Notice'sPagingList", description = "공지사항 목록 및 페이징 정보")
     @PostMapping("/save")
@@ -143,7 +143,7 @@ public class apiNoticeController {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "DB에 파일 정보를 찾을 수 없습니다");
             }
 
-            Path filePath = Paths.get(fileDir, storedFilename);
+            Path filePath = Paths.get(noticeFileDir, storedFilename);
             Resource resource = new UrlResource(filePath.toUri());
 
             // 3. 실제 파일 존재 여부 확인
@@ -185,7 +185,7 @@ public class apiNoticeController {
             String storedImageName = UUID.randomUUID().toString() + "_" + originalImageName;
 
             // 3. 파일이 저장될 경로
-            String CKEditorImageSavePath = CKEditorImageDir + storedImageName;
+            String CKEditorImageSavePath = noticeCKEditorImageDir + storedImageName;
 
             // 4. 파일 시스템에 저장
             File saveFile = new File(CKEditorImageSavePath); // 🟢 변경된 변수 사용

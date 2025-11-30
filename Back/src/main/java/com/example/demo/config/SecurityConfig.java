@@ -114,6 +114,8 @@ public class SecurityConfig {
             // 공지사항 보는 거 로그인 안해도 가능
             auth.requestMatchers("/api/notice/paging").permitAll();
             auth.requestMatchers(HttpMethod.GET, "/api/notice/*").permitAll();
+            auth.requestMatchers(HttpMethod.GET, "/api/notice/download/**").permitAll();
+
             // 공지사항(관리자만 가능), 글 쓰기와 수정 삭제는 관리자만 가능
             auth.requestMatchers("/api/notice/save").hasAuthority("ADMIN");
             auth.requestMatchers(HttpMethod.PUT, "/api/notice/update/*").hasAuthority("ADMIN");

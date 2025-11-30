@@ -7,7 +7,7 @@ import React, {Fragment, useState, useCallback, useRef, useEffect} from 'react';
 // import { MyCustomUploadAdapterPlugin } from '../../services/CKEditorAdapter';
 
 import api from '../../api/axiosConfig';
-import { formatBytes, allowedExtensions, maxCount, maxSize, validateAndGetFiles } from '../../services/fileUtils';
+import { formatBytes, allowedExtensions, maxCount, maxSize, validateAndGetFiles } from '../../services/noticeFileUtils';
 // CSS 파일은 재활용
 
 import "../../css/login.css";
@@ -175,7 +175,7 @@ const NoticeWrite = () => {
 
         // 파일들을 formData에 추가
         uploadedFiles.forEach(file => {
-            formData.append("noticeFileUpload", file);
+            formData.append("uploadFiles", file);
         });
 
         const url = isEditMode ? `/api/notice/update/${id}` : '/api/notice/save';
@@ -314,26 +314,26 @@ const NoticeWrite = () => {
 
                                 {/* 파일 업로드 영역 및 미리보기 */}
                                 <div className="upload" id="upload" ref={uploadAreaRef}>
-                                    {existingFiles.filter(f => !filesToDeleteIds.includes(f.noticeFileId)).length === 0 && uploadedFiles.length === 0 ? (
+                                    {existingFiles.filter(f => !filesToDeleteIds.includes(f.id)).length === 0 && uploadedFiles.length === 0 ? (
                                         <p>파일을 드래그하여 첨부할 수 있습니다</p>
                                     ) : (
                                         <div className="preview-container">
-                                            {existingFiles.filter(f => !filesToDeleteIds.includes(f.noticeFileId)).map((file, index) => (
+                                            {existingFiles.filter(f => !filesToDeleteIds.includes(f.id)).map((file, index) => (
                                                 // key는 React가 목록 요소를 식별하는 데 도움을 줍니다.
-                                                <React.Fragment key={file.noticeFileId}>
+                                                <React.Fragment key={file.id}>
                                                     {/* 첫 번째 요소가 아닐 경우에만 점선 추가 */}
                                                     {index > 0 && (
                                                         <div className="line-dotted-preview"></div>
                                                     )}
                                                     <div className="preview-box">
                                                         <div>
-                                                            <div className="file-name">{file.noticeFileName}</div>
-                                                            <div className="file-size">{formatBytes(file.noticeFileSize)}</div>
+                                                            <div className="file-name">{file.originalFilename}</div>
+                                                            <div className="file-size">{formatBytes(file.fileSize)}</div>
                                                         </div>
                                                         <button
                                                             className="delete-btn"
                                                             type="button"
-                                                            onClick={() => deleteFile(file.noticeFileId)}
+                                                            onClick={() => deleteExistingFile(file.id)}
                                                         >
                                                             <i className="fa-solid fa-trash fa-lg"></i>
                                                         </button>
@@ -344,7 +344,7 @@ const NoticeWrite = () => {
                                             {/* 2. 새로 업로드된 파일 목록 */}
                                             {uploadedFiles.map((file, index) => (
                                                 <React.Fragment key={file.name + file.size}>
-                                                    {(existingFiles.filter(f => !filesToDeleteIds.includes(f.noticeFileId)).length > 0 || index > 0) && (
+                                                    {(existingFiles.filter(f => !filesToDeleteIds.includes(f.id)).length > 0 || index > 0) && (
                                                         <div className="line-dotted-preview"></div>
                                                     )}
                                                     <div className="preview-box">
