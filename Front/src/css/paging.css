@@ -4,7 +4,7 @@
 
 .community-title{
     width:1000px;
-    border-bottom:1px solid #ddd;
+    margin-bottom:50px;
 }
 .community-title h1{
     font-family: "kopu";
@@ -19,34 +19,71 @@
 .community-box{
     width:1000px;
     margin-bottom:150px;
+    
 }
 .community-box .community-filter{
     border:none;
     background: transparent;
+    padding:0;
+    width:100px;
 }
-.community-box input{
+.community-box>.etc{
+    display:flex;
+    align-items: center;
+    border-bottom: 1px solid rgb(228, 232, 232);
+    height:50px;
+}
+.etc-search{
+    display:flex;
+    position:relative;
     width:280px;
-    border-radius:8px;
-    border:1px solid #ddd;
-    margin:10px 0 10px 500px;
+    margin-left:480px;
 }
+.etc-search>input{
+    width:100%;
+    border-radius:8px;
+    border:1px solid rgb(228, 232, 232);
+    padding: 10px 40px 10px 40px;
+    box-sizing: border-box;
+    /* right: 15px; */
+    /* top: 20%;  */
+    transform: translateY(-20%);
+    cursor: pointer;
+}
+.etc-search>.magnifier{
+    position: absolute;
+    border:none;
+    width:30px;
+    height:30x;
+    background: transparent;
+    margin-left:10px;
+    padding:0;
+}
+.etc-search>.magnifier>img{
+    width:30px;
+    height:30px;
+    display:block;
+}
+
+/* 커뮤니티 글목록 */
 .article-box{
     margin-bottom:50px;
 }
 .article{
     border-bottom: 1px solid rgb(228, 232, 232);
     padding: 24px 0px;
-    height:210px;
+    /* height:250px; */
     width:1000px;
 }
 .article-main{
-    /* border:1px solid; */
 }
 .article-main p{
     text-align:left;
+    margin:5px 20px;
+    font-family:"kopume"
 }
-.article-main p:first-child{
-    font-size:16px;
+.article-main p:nth-child(2){
+    font-size:20px;
     font-weight: bold;
     font-family: "kopu";
 }
@@ -54,13 +91,19 @@
 .article-response{
     display:flex;
     align-items: center;
+    margin:0 15px;
+    height:20px;
 }
-.article-response>div{
+.article-response>.read{
     margin:10px;
 }
 .response-img{
-    width:13px;
-    height:12px;
+    width:15px;
+    height:15px;
+    margin-right:10px;
+}
+.read>span{
+    height:15px;
 }
 .community-bottom{
     display:flex;
@@ -108,4 +151,13 @@
 .page-numbers a {
     color: #333;
     cursor: pointer;
+}
+
+/* 게시글 없을 때  */
+.no-articles{
+    width:1000px;
+    height:300px;
+    text-align: center;
+    border-radius:8px;
+    border:1px solid #ddd;
 }

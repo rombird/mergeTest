@@ -1,0 +1,188 @@
+.boardDetail{
+    width:1000px;
+    margin-top:100px;
+}
+.pathtitle{
+    height:30px;
+    margin-bottom:20px;
+    /* background-color: pink; */
+    border-bottom:1px solid rgb(228, 232, 232);
+}
+.pathtitle>.path{
+    height:30px;
+    margin:0;
+}
+.pathtitle>.path>p{
+    padding:0;
+    margin:0;
+    font-family:"kopume";
+    text-align: left;
+    
+}
+
+/* 커뮤니티 내용 */
+.boardContent{
+    text-align: left;
+    margin-left:10px;
+}
+.boardContent p{
+    font-family:"kopume";
+}
+.content-number{
+}
+.content-number>p{
+    margin:0;
+    padding-left:6px;
+    padding-top:4px;
+    width:65px;
+    height:30px;
+    border-radius: 16px;
+    background-color: #65A3FF;
+    color:white;
+    font-family:"kopu";
+}
+.content-title>h3{
+    margin:10px 0;
+
+}
+.writer>p{
+    margin:0;
+}
+
+.boardContent>.date-hit{
+    /* margin-bottom:30px; */
+}
+.date-hit>.date{
+    display:flex;
+    height:25px;
+}
+.date-hit>.date>img{
+    width:15px;
+    height:15px;
+    margin:5px 5px 5px 0;;
+}
+.date-hit>.date>p{
+    margin:0;
+}
+.date-hit>.hit{
+    display:flex;
+    height:25px;
+}
+.date-hit>.hit>img{
+    width:15px;
+    height:15px;
+    margin:5px 5px 5px 0;;
+}
+.date-hit>.hit>p{
+    margin:0;
+}
+.content-line{
+    margin:30px 0;
+    border-bottom:1px solid rgb(228, 232, 232);
+}
+.content-key{
+    border-bottom:1px solid rgb(228, 232, 232);
+}
+.fileadd{
+    margin-top:200px;
+    border-top:1px solid rgb(228, 232, 232);
+    display:flex;
+    align-items: center;
+    text-align: center;
+}
+.fileadd>.filename{
+    margin-top:10px;
+    display:flex;
+    width:1000px;
+    border:1px solid rgb(228, 232, 232);
+}
+.filename>p{
+    width:200px;
+    margin:0 5px 0 0;
+    background-color: rgb(228, 232, 232);
+}
+.filename>a{
+    padding-left:5px;
+}
+.action-btn{
+    font-family: "kopu";
+    border:none;
+    margin:50px 0;
+}
+.action-btn>.listback-btn{
+    border-radius: 4px;
+    width:100px;
+    height:50px;
+    margin:0 10px;
+    border:none;
+}
+.action-btn>.update-btn{
+    border-radius: 4px;
+    width:100px;
+    height:50px;
+    background-color: #65A3FF;
+    color:white;
+    margin:0 10px;
+    border:none;
+}
+.action-btn>.delete-btn{
+    border-radius: 4px;
+    width:100px;
+    height:50px;
+    margin:0 10px;
+    border:none;
+    background-color: #ddd;
+}
+
+.comment{
+    text-align:left;
+    height:130px;
+}
+.comment>.comment-write{
+    border:1px solid rgb(228, 232, 232);
+    border-radius:8px;
+    width:200px;
+    margin:10px 15px 10px 0;
+    padding:10px;
+}
+.comment>.comment-content{
+    border:1px solid rgb(228, 232, 232);
+    border-radius:8px;
+    width:670px;
+    padding:10px;
+}
+.comment>.comment-btn{
+    border-radius: 4px;
+    width:67px;
+    height:50px;
+    background-color: #65A3FF;
+    color:white;
+    margin-left:15px;
+    border:none;
+}
+.comment-list{
+    text-align:left;
+    margin-bottom:100px;
+}
+.comment-list>h4{
+    margin-bottom:20px;
+}
+.comment-detail-wrapper{
+    background-color: rgb(228, 232, 232);
+    margin:5px 0;
+    padding: 15px;
+}
+.comment-item{
+    border-bottom:1px solid #65A3FF;
+}
+.comment-item-list>span{
+    display:block;
+    font-family: "kopume";
+}
+.comment-writer{
+    margin-bottom:5px;
+}
+.comment-time{
+    font-size:12px;
+    margin-bottom:15px;
+}

@@ -88,7 +88,7 @@ public class apiBoardController {
 
         log.info("POST /api/board/writeBoard 게시글 작성 요청: {}", boardDto.getBoardTitle());
 
-        // 💡 3. 수신한 파일을 DTO의 필드에 수동으로 설정
+        // 3. 수신한 파일을 DTO의 필드에 수동으로 설정
         // DTO에 List<MultipartFile> fileUpload; 필드가 있으므로 사용 가능
         if (fileUploads != null && !fileUploads.isEmpty()) {
             boardDto.setFileUpload(fileUploads);
@@ -178,6 +178,8 @@ public class apiBoardController {
         }
     }
 
+
+    // 삭제
     @Operation(summary = "boardDelete", description = "게시글 삭제")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id){
@@ -277,35 +279,5 @@ public class apiBoardController {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-//    @GetMapping("/update/{id}")
-//    public String updateForm(@PathVariable Long id, Model model){
-//        BoardDto boardDto = boardService.findById(id);
-//        model.addAttribute("boardUpdate", boardDto);
-//
-//        return "board/update";
-//    }
-//
-//    @Operation(summary = "boardUpdatePost", description = "게시글 수정 포스팅")
-//    @PostMapping("/board/update")
-//    public String update(@ModelAttribute BoardDto boardDto, Model model){
-//        log.info("post/ board/update... 게시판 업데이트 포스팅");
-//
-//        BoardDto board = boardService.update(boardDto);
-//        model.addAttribute("board", board);
-//
-//        System.out.println("contents = " + boardDto.getBoardContents());
-//        return "redirect:/board/" + boardDto.getId(); // 게시글 상세페이지로 이동
-//    }
 
 }

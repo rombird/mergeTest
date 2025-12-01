@@ -36,8 +36,10 @@ body {
 }
 
 .layoutCenter{
-    width:1440px;
-    margin:0 auto;
+    max-width: 1440px; 
+    width: 100%; /* 부모 너비의 100%를 따라가되, 1440px을 넘지 않게 설정 */
+    margin: 0 auto;
+    padding: 0 15px;
 }
 
  /* header width:1444px */
@@ -50,7 +52,7 @@ body {
     position:sticky; 
     top: 0;
     left:0;
-    width:100vw;
+    width: 100%;
     /* border:1px solid; */
     z-index: 1000;
     /* 맨 위에 붙어있게 하기 위해 top, left 0 필수 */
@@ -62,12 +64,14 @@ body {
     padding:15px 0;
     margin:10px 0;
 }
-
+/* 로그아웃 상태에서 : 로그인, 회원가입 */
 .topHeader>.topList>.topNav{
     display:flex;
     justify-content: flex-end;
-    width:400px;
+    width:auto;
     margin-left:auto;
+}
+.topNav{
 }
 
 .topNavli>.login{
@@ -97,6 +101,12 @@ body {
     width:25px;
     height:25px;
     margin:0 5px;
+}
+/* 로그인상태 : 유제네임, 마이페이지, 로그아웃 */
+.topNavli>.username-check{
+    margin-right:20px;
+    font-size:17px;
+    font-family:'kopu';
 }
 .topNavli>.mypage{
     margin-right:20px;
@@ -136,22 +146,28 @@ body {
     font-family:'logo';
     color:#65A3FF;
     font-size:50px;
-    width:250px;
+    /* width:250px; */
+    flex-shrink:0; /* 로고는 줄어들지 않도록 */
 }
 .wrap{
     display:flex;
-    position: absolute;
+    /* position: absolute; */
     /* width: calc(100% - 600px); */
-    left: 270px;
+    /* left: 270px; */
+    flex-grow:1;
+    justify-content: flex-start;
+    margin-left:20px;
 }
 .wrap>.mainNav {
     display: flex;
+    width:100%;
     justify-content: space-evenly;
 }
 .wrap>.mainNav>.mainList {
     position: relative; 
     text-align:center;
-    width: 200px;
+    /* width: 200px; */
+    flex-grow:1;
     height:90px;
     margin:0 10px;
 }
@@ -237,6 +253,7 @@ body {
 footer{
     background-color:#cfcfcf13;
     height:240px;
+    width: 100%;
 }
 .mainFooter{
     padding-top: 20px;
@@ -271,39 +288,29 @@ footer{
     margin:5px 0;
 }
 .footerInfoR{
-    margin-left:220px;
+    margin-left:270px;
     width:500px;
     display:flex;
 }
 .footerInfoR>.site{
     border-right:1px solid lightgray;
-    width:120px;
+    width:70px;
     height:60px;
     
 }
-.footerInfoR .footer-p{
-    padding:10px;
-    font-family: "kopume";
-    font-size:13px;
-}
-.footerInfoR li{
-    /* margin:10px; */
-}
 .footerInfoR>.related{
     border-right:1px solid lightgray;
-    width:130px;
+    width:90px;
     height:60px;
 }
-.footerInfoR>.related a{
-    padding:10px;
-}
-
-
 .footerInfoR>.personInfo{
     width:210px;
 }
-.footerInfoR>.personInfo a{
-    padding:10px;
+.footerInfoR .footer-p{
+    padding:2px;
+    margin:5px;
+    font-family: "kopume";
+    font-size:13px;
 }
 
 

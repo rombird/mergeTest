@@ -17,16 +17,46 @@
     height:650px;
     margin-bottom:20px;
 }
-.notice-list>form{
+.notice-list-form{
     text-align: right;
-    margin:10px 0;
+    margin-top: 30px;
+    display: flex;
+    position: relative;
+    margin-left: 690px;
 }
 .notice-list input{
     width:280px;
     border-radius:8px;
-    border:1px solid #ddd;
-    margin:10px 0 10px 500px;
+    /* margin:10px 0 10px 500px; */
+    border-radius:8px;
+    border:1px solid rgb(228, 232, 232);
+    padding: 10px 40px 10px 40px;
+    box-sizing: border-box;
+    /* right: 15px; */
+    /* top: 20%;  */
+    transform: translateY(-20%);
+    cursor: pointer;
 }
+
+.notice-list .search-btn{
+    position: absolute;
+    border:none;
+    width:30px;
+    height:30x;
+    background: transparent;
+    /* margin-left:10px; */
+    padding:0;
+}
+.notice-list .search-btn>img{
+    width:30px;
+    height:30px;
+    display:block;
+    margin-left: 10px;
+}
+
+
+
+
 .notice-middle{
 }
 .notice-middle>table{

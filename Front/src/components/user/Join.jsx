@@ -9,7 +9,6 @@ const Join  = ()=>{
     const navigate = useNavigate();
     const [username ,setUsername] = useState()
     const [password ,setPassword] = useState()
-    const [rePassword, setRepassword] = useState()
     const [name, setName] = useState()
     const [phone, setPhone] = useState()
     // 이메일
@@ -221,7 +220,7 @@ const Join  = ()=>{
                         <div className="bottom-border"></div>
                         <div className = "cancel-join">
                             <button>취소</button>
-                            <button id = "join_btn" type="submit">회원가입</button>
+                            <button id="join_btn" type="submit">회원가입</button>
                         </div>
                     </form>
                 </div>

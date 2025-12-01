@@ -5,6 +5,8 @@ import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
@@ -21,7 +23,12 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 	public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException, ServletException {
 //		log.error("CustomAuthenticationEntryPoint's commence invoke....");
-		response.sendRedirect("/user/login?error="+authException.getMessage());
+//		response.sendRedirect("/login?error="+authException.getMessage());
+        response.setStatus(HttpStatus.UNAUTHORIZED.value()); // 401 UNAUTHORIZED 설정
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        response.setCharacterEncoding("UTF-8");
+        String message = String.format("{\"status\": 401, \"message\": \"인증이 필요합니다. 로그인 페이지로 이동하세요.\"}");
+        response.getWriter().write(message); // JSON 응답
 	}
 
 }

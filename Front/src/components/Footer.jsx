@@ -20,15 +20,15 @@ const Footer = () => {
                         </div>
                         <div className="footerInfoR">
                             <ul className="site">
-                                <li><Link className="footer-p" to="/notice" />FAQ</li>
-                                <li><Link className="footer-p" to="/sitemap" />사이트맵</li>
+                                <li className="footer-p">FAQ</li>
+                                <li className="footer-p">사이트맵</li>
                             </ul>
                             <ul className="related">
-                                <li><Link className="footer-p" to="/related" />관련기관정보</li>
+                                <li className="footer-p">관련기관정보</li>
                             </ul>
                             <ul className="personInfo">
-                                <li><Link className="footer-p" to="/personal" />개인정보처리방침</li>
-                                <li><Link className="footer-p" to="/use" />이용약관</li>
+                                <li className="footer-p">개인정보처리방침</li>
+                                <li className="footer-p">이용약관</li>
                             </ul>
                         </div>
                     </div>

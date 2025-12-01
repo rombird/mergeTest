@@ -76,6 +76,7 @@ public class UserDto {
     public static UserDto toDto(User user){
         return UserDto.builder()
                 .username(user.getUsername())
+                .name(user.getName())
                 .password(null) // 비밀번호는 보안상 화면으로 보내지 않도록 null 처리
                 .email(user.getEmail())
                 .phone(user.getPhone())

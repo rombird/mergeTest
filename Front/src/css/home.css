@@ -106,17 +106,19 @@ main{
 /* bgImg */
 .bgImg{
     /* border:1px solid; */
-    height:460px;
+    height:400px;
     display:flex;
 }
 .bgImg>.title{
-    width:800px;
+    width:700px;
     height:400px;
     /* border:1px solid; */
-    margin:20px 0 30px 0;
+}
+.title>p{
+    font-family:"kopu";
 }
 .title>.small{
-    margin:50px 0 0 0;
+    margin-top:30px;
     font-size:30px;
     padding-bottom:5px;
     font-weight:400;
@@ -132,24 +134,20 @@ main{
     color:#65A3FF;
     font-weight:500;
 }
-
 .bgImg>.daegu{
-    width:600px;
+    width:630px;
     height:400px;
     background-image: url("../../public/images/daegu_img.png");
-    margin:20px 30px 20px 10px;
 }
-
 
 /* issue */
 .issue{
-    /* height:500px; */
-    /* border:1px solid; */
     border-radius:20px;
     display:flex;
     justify-content: center; 
     align-items: center;
-    height:500px;
+    gap:20px;
+    padding:0 !important; 
 }
 
 .service{
@@ -159,33 +157,13 @@ main{
 }
 
 .issueBoxes{
-    /* border:1px solid; */
-    margin:10px;
+    /* margin:10px; */
+    padding:10px;
     display:flex;
     justify-content: center;
     text-align: center;
     height:400px;
 }
-
-/* .btn {
-  appearance: none;
-  background-color: #fff;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-self: center;
-  margin: 20px;
-  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
-  &:hover {
-    box-shadow: 0 0 40px 40px #3A6B71 inset;
-    color:white;
-    outline: 0;
-  }
-  &:focus {
-    color: #3A6B71;
-    outline: 0;
-  }
-} */
 
 #box{
     background: rgba(247, 247, 247, 0.9);
@@ -193,7 +171,7 @@ main{
     height:380px;
     border-radius:8px;
     overflow:hidden;
-    margin:20px;
+    margin:0 5px;
     transition: all 0.3s cubic-bezier(0.42, 0.0, 0.58, 1.0);
 }
 #box:hover{
@@ -222,9 +200,9 @@ main{
     width:100%;
     height: auto;
     /* max-height: 250px; */
-    /* border: 1px solid blue; */
     font-size: 30px;
     font-weight: 700;
+    font-family:"kopu";
 }
 #box dd{
     height:auto; 
@@ -234,8 +212,8 @@ main{
     padding:0;
     display: block;
     unicode-bidi: isolate;
+    font-family: "kopume";
 }
-
 
 /* .issue>.issueEnd{
     height:55px;
@@ -246,29 +224,33 @@ main{
 } */
 
 /* subMain2 */
-.trend{
-    height:700px;
-    /* border:1px solid; */
-}
 .trendContent{
-    /* border:1px solid; */
+    /* background-color: lightblue; */
+    margin-top:50px;
+    margin-bottom:100px;
 }
 .trendTitle{
-    height:50px;
     text-align: center;
-    margin:20px 70px 0 20px;
+    margin:20px 0;
+}
+.trendTitle>h2{
+    font-family: "kopu";
 }
 .trendBox{
-    display:flex;
-    justify-content: center; 
-    align-items: center;
+    display: flex;
+    /* 혹은 가로로 하고 싶을 때: */
+    align-items: flex-start;
+    gap: 10px;
+    flex-wrap: wrap; /* 중요 */
+    justify-content : center;
 }
-.trendBox div{
-    margin:25px 20px 0 20px;
+/* .trendBox>div:nth-child(1){
     width:450px;
-    height:530px;
-    background-color:rgb(234, 234, 234);
-    border-radius: 10px;
-    box-shadow: 1px 2px 8px rgba(0, 0, 0, .15);
-    box-sizing: border-box;
-}
+    height:400px;
+    border: 1px solid;
+} */
+ /* .trendBox>div:nth-child(3){
+    width:450px;
+    height:400px;
+    border: 1px solid;
+} */
