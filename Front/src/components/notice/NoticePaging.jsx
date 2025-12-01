@@ -132,14 +132,22 @@ const NoticePaging = () => {
                     <p> HOME &gt; 이용안내 &gt; 공지사항 </p>
                 </div>
                 <div className="notice-list layoutCenter">
+<<<<<<< HEAD
                     <form>
+=======
+                    <form className='notice-list-form'>
+>>>>>>> 니혼진
                         <input 
                             type='text'
                             placeholder='제목, 내용 검색'
                             name='searchKeyword'
                             defaultValue={searchQuery}
                         />
+<<<<<<< HEAD
                         <button type='submit' className='search-btn'>검색</button>
+=======
+                        <button type="submit" className="search-btn"><img src="../../images/search2.png" alt="돋보기" /></button>
+>>>>>>> 니혼진
                     </form>
                     <div className='notice-table'>
                         <div className='notice-middle'>

@@ -1,7 +1,11 @@
 import React, {useState,useEffect} from 'react'
 import {Link, useNavigate} from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+<<<<<<< HEAD
 import SimpleChatbot from './SimpleChatbot';
+=======
+// import SimpleChatbot from './SimpleChatbot';
+>>>>>>> 니혼진
 import "../css/common.css";
 
 
@@ -24,8 +28,12 @@ const Header = () => {
         e.preventDefault(); // 폼의 기본 동작 방지 (Link 대신 button/onClick을 사용할 경우 불필요하지만 습관적으로 체크)
         await logout(); // AuthContext의 logout 함수 실행 (서버 측 로그아웃 처리)
         alert("로그아웃이 완료되었습니다.");  // 알림창 표시(실행흐름을 정지시키기때문에 나중에 처리) -> AuthContext 파일에서 logout 작업을 했기 때문에 OK
+<<<<<<< HEAD
         navigate('/'); // 메인 페이지로 이동
         
+=======
+        window.location.replace('/'); // 메인 페이지로 이동
+>>>>>>> 니혼진
     };
 
     const displayUsername = user ? user.name : '';
@@ -70,7 +78,7 @@ const Header = () => {
                             <ul className="mainNav">
                                 <li className="mainList">
                                     <div className="listLine">
-                                        <Link className="mainMenu" to="/trend" >상권트렌드</Link>
+                                        <Link className="mainMenu" to="" >상권트렌드</Link>
                                     </div>
                                 </li>
                                 <li className="mainList">
@@ -111,6 +119,7 @@ const Header = () => {
                 </div>
             </header>
             
+<<<<<<< HEAD
             {/* 챗봇 컴포넌트 렌더링 */}
             <SimpleChatbot
                 isVisible={isChatbotVisible}
@@ -119,6 +128,13 @@ const Header = () => {
 
             
             
+=======
+            {/* 챗봇 컴포넌트 렌더링
+            <SimpleChatbot
+                isVisible={isChatbotVisible}
+                onClose={() => setIsChatbotVisible(false)}  // 닫기버튼을 누르면 상태를 false로 설정
+            /> */}
+>>>>>>> 니혼진
         </>
     )
 }

@@ -225,7 +225,11 @@ main{
 
 /* subMain2 */
 .trendContent{
+<<<<<<< HEAD
     background-color: lightblue;
+=======
+    /* background-color: lightblue; */
+>>>>>>> 니혼진
     margin-top:50px;
     margin-bottom:100px;
 }
@@ -242,6 +246,7 @@ main{
     align-items: flex-start;
     gap: 10px;
     flex-wrap: wrap; /* 중요 */
+<<<<<<< HEAD
 }
 .trendBox>div:nth-child(1){
     width:450px;
@@ -253,3 +258,17 @@ main{
     height:400px;
     border: 1px solid;
 }
+=======
+    justify-content : center;
+}
+/* .trendBox>div:nth-child(1){
+    width:450px;
+    height:400px;
+    border: 1px solid;
+} */
+ /* .trendBox>div:nth-child(3){
+    width:450px;
+    height:400px;
+    border: 1px solid;
+} */
+>>>>>>> 니혼진

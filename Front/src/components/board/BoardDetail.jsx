@@ -234,4 +234,8 @@ const BoardDetail = () => {
     );
 }
 
+<<<<<<< HEAD
 export default BoardDetail;
+=======
+export default BoardDetail;
+>>>>>>> 니혼진

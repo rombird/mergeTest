@@ -21,6 +21,11 @@ export const AuthProvider = ({ children }) => {
             setUser(null); // 사용자 정보 초기화
         } catch (error) {
             console.error("로그아웃 실패:", error);
+<<<<<<< HEAD
+=======
+            setIsLoggedIn(false);
+            setUser(null);
+>>>>>>> 니혼진
         }
     };
 

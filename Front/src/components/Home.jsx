@@ -84,9 +84,15 @@ function Home() {
                                     <h2>트렌드 정보</h2>
                                 </div>
                                 <div className="trendBox">
+<<<<<<< HEAD
                                     <div>일단은 width : 450px, height : 400px로 잡아둠 </div>
                                     <div><SalesAnalysis /></div>
                                     <div>여기에 width를 지정하면 컴포넌트 가져왔을 때 css가 안먹힐 수 있으니까 css 가져올때 width, height 속성 제거하고 적용</div>
+=======
+                                    {/* <div>일단은 width : 450px, height : 400px로 잡아둠 </div> */}
+                                    <div><SalesAnalysis /></div>
+                                    {/* <div>여기에 width를 지정하면 컴포넌트 가져왔을 때 css가 안먹힐 수 있으니까 css 가져올때 width, height 속성 제거하고 적용</div> */}
+>>>>>>> 니혼진
                                 </div>
                             </div>
                         </div>

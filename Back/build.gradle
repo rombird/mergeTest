@@ -86,6 +86,15 @@ dependencies {
     // jaxb-api: XML 바인딩 API
     implementation 'javax.xml.bind:jaxb-api:2.3.1'
 
+<<<<<<< HEAD
+=======
+    // Selenium Java 의존성 (런타임에 필요)
+    implementation 'org.seleniumhq.selenium:selenium-java:4.15.0'
+
+    // WebDriverManager 의존성 (런타임에 필요)
+    implementation 'io.github.bonigarcia:webdrivermanager:5.6.2'
+
+>>>>>>> 니혼진
     //TEST
     testImplementation 'org.springframework.security:spring-security-test'
 }

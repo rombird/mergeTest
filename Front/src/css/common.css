@@ -104,7 +104,10 @@ body {
 }
 /* 로그인상태 : 유제네임, 마이페이지, 로그아웃 */
 .topNavli>.username-check{
+<<<<<<< HEAD
     background-color: pink;
+=======
+>>>>>>> 니혼진
     margin-right:20px;
     font-size:17px;
     font-family:'kopu';
@@ -289,39 +292,29 @@ footer{
     margin:5px 0;
 }
 .footerInfoR{
-    margin-left:220px;
+    margin-left:270px;
     width:500px;
     display:flex;
 }
 .footerInfoR>.site{
     border-right:1px solid lightgray;
-    width:120px;
+    width:70px;
     height:60px;
     
 }
-.footerInfoR .footer-p{
-    padding:10px;
-    font-family: "kopume";
-    font-size:13px;
-}
-.footerInfoR li{
-    /* margin:10px; */
-}
 .footerInfoR>.related{
     border-right:1px solid lightgray;
-    width:130px;
+    width:90px;
     height:60px;
 }
-.footerInfoR>.related a{
-    padding:10px;
-}
-
-
 .footerInfoR>.personInfo{
     width:210px;
 }
-.footerInfoR>.personInfo a{
-    padding:10px;
+.footerInfoR .footer-p{
+    padding:2px;
+    margin:5px;
+    font-family: "kopume";
+    font-size:13px;
 }
 
 

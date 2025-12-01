@@ -42,6 +42,11 @@ function App() {
                 <Route path="/notice/noticeWrite" element={<NoticeWrite />} />
                 <Route path="/notice/:id" element={<NoticeDetail />} />
                 <Route path="/notice/update/:id" element={<NoticeWrite />} />
+<<<<<<< HEAD
+=======
+
+                {/* <Route path="/predict" element={}/> */}
+>>>>>>> 니혼진
               </Routes>
             
             <Footer />
