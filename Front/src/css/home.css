@@ -99,6 +99,9 @@ main{
     /* border:1px solid; */
 }
 
+.subMain1 {
+    /* border:1px solid; */
+}
 
 /* bgImg */
 .bgImg{
@@ -222,10 +225,7 @@ main{
 
 /* subMain2 */
 .trendContent{
-    background-color: lightblue;
-
     /* background-color: lightblue; */
-
     margin-top:50px;
     margin-bottom:100px;
 }
@@ -254,4 +254,3 @@ main{
     height:400px;
     border: 1px solid;
 } */
-

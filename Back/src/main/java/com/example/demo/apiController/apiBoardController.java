@@ -109,7 +109,7 @@ public class apiBoardController {
             // 1. 폼 데이터 (제목, 글쓴이, 내용 등)를 DTO에 바인딩
             @ModelAttribute BoardDto boardDto,
             // 2. 파일 데이터를 "fileUpload" 키로 명시적으로 받음
-            @RequestPart(value = "fileUpload", required = false) List<MultipartFile> fileUploads) throws IOException {
+            @RequestPart(value = "uploadFiles", required = false) List<MultipartFile> fileUploads) throws IOException {
 
         log.info("POST /api/board/writeBoard 게시글 작성 요청: {}", boardDto.getBoardTitle());
 
