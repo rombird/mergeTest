@@ -247,7 +247,7 @@ public class BoardService {
     // 페이징 기능
     @Transactional
     public Page<BoardDto> paging(Pageable pageable){
-        int page = pageable.getPageNumber() - 1;
+        int page = pageable.getPageNumber();
 //        int page = pageable.getPageNumber();
         int pageLimit = 10;  // 한 페이지에 보여줄 글 개수
 

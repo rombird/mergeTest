@@ -56,7 +56,7 @@ public class apiBoardController {
     @Operation(summary = "PagingList", description = "게시글 목록 및 페이징 정보")
     @GetMapping("/paging")
     public ResponseEntity<?> paging(
-            @PageableDefault(page = 1, size = 10) Pageable pageable){     // @PageableDefault(page = 1) -> 기본적으로 1페이지 보여줄래
+            @PageableDefault(page = 0, size = 10) Pageable pageable){     // @PageableDefault(page = 1) -> 기본적으로 1페이지 보여줄래
         log.info("GET  /api/board/paging... 페이징처리 apiBoardController");
         Page<BoardDto> boardList = boardService.paging(pageable);
 
@@ -79,9 +79,16 @@ public class apiBoardController {
 //        return ResponseEntity.ok(response);
 
         int blockLimit = 10;
-        // React에서 startPage, endPage 계산에 필요한 정보를 함께 JSON으로 반환
-        int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) -1) * blockLimit + 1; // 1, 4, 7,
-        int endPage = ((startPage + blockLimit - 1) < boardList.getTotalPages()) ? startPage + blockLimit - 1 : boardList.getTotalPages();
+//        // React에서 startPage, endPage 계산에 필요한 정보를 함께 JSON으로 반환
+//        int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) -1) * blockLimit + 1; // 1, 4, 7,
+//        int endPage = ((startPage + blockLimit - 1) < boardList.getTotalPages()) ? startPage + blockLimit - 1 : boardList.getTotalPages();
+
+
+        int currentPage = pageable.getPageNumber() + 1; // ★ 0 기반 → 1 기반
+
+        int startPage = ((currentPage - 1) / blockLimit) * blockLimit + 1;
+
+        int endPage = Math.min(startPage + blockLimit - 1, boardList.getTotalPages());
 
         // Json 응답을 위한 Map 또는 별도의 DTO 사용
 

@@ -159,6 +159,8 @@ const WriteBoard = () => {
                     const data = response.data.board;
                     if (!data) throw new Error("게시글 데이터가 없습니다");
 
+                    console.log("데이터에 머가 들어있냐", data);
+
                     setBoardTitle(data.boardTitle);
                     setBoardWriter(data.boardWriter);
                     setBoardContents(data.boardContents);
@@ -238,7 +240,7 @@ const WriteBoard = () => {
                     headers: {'Content-Type': 'multipart/form-data'},
                 });
             } else{
-                response = await api.put(`http://localhost:8090${url}`, formData, {
+                response = await api.put(url, formData, {
                     headers:{'Content-Type':'multipart/form-data'}
                 })
             }
