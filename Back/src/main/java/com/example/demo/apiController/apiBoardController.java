@@ -60,6 +60,24 @@ public class apiBoardController {
         log.info("GET  /api/board/paging... 페이징처리 apiBoardController");
         Page<BoardDto> boardList = boardService.paging(pageable);
 
+//        int blockLimit = 10;
+//
+//        // startPage, endPage 계산 시 0-기반인 boardList.getNumber()를 1-기반으로 변환하여 사용해야 합니다.
+//        // boardList.getNumber()는 현재 페이지 인덱스 (0부터 시작)
+//        int currentPageOneBased = boardList.getNumber() + 1;
+//
+//        // 1-기반 페이지를 사용하여 startPage 계산
+//        int startPage = (((int)(Math.ceil((double)currentPageOneBased / blockLimit))) -1) * blockLimit + 1;
+//        int endPage = ((startPage + blockLimit - 1) < boardList.getTotalPages()) ? startPage + blockLimit - 1 : boardList.getTotalPages();
+//
+//        Map<String, Object> response = new HashMap();
+//
+//        response.put("boardList" , boardList);
+//        response.put("startPage", startPage);
+//        response.put("endPage", endPage);
+//
+//        return ResponseEntity.ok(response);
+
         int blockLimit = 10;
         // React에서 startPage, endPage 계산에 필요한 정보를 함께 JSON으로 반환
         int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) -1) * blockLimit + 1; // 1, 4, 7,

@@ -39,9 +39,13 @@ const Paging = () => {
             // page=1 로 요청 시 서버에서 0번 페이지를 가져올 수도 있습니다.
             // 서버 설정에 따라 page=${page - 1} 또는 page=${page}를 사용해야 합니다.
             // 현재는 URL의 page를 그대로 사용하겠습니다.
+
+
             const response = await api.get(`${API_ENDPOINT}?page=${page}&size=${pageSize}`);
             const data = response.data;
-            
+
+            console.log("데이터가 뭔가요?" , data);
+
             setBoardData(data.boardList);
             setStartPage(data.startPage);
             setEndPage(data.endPage);

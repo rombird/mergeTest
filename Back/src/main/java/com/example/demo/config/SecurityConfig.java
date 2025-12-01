@@ -90,12 +90,9 @@ public class SecurityConfig {
             auth.requestMatchers("/user").authenticated();
             auth.requestMatchers("/myInfo/password").authenticated();
 
-<<<<<<< HEAD
-=======
             // 크롤링 관련, 누구나 열람 가능
-            auth.requestMatchers("/api/v1/simple-chat").permitAll();
+            auth.requestMatchers("/api/crawl/**").permitAll();
 
->>>>>>> 니혼진
             // 챗봇 관련
             // 심플 챗봇, 누구든지 가능
             auth.requestMatchers("/api/v1/simple-chat").permitAll();
@@ -114,7 +111,7 @@ public class SecurityConfig {
             auth.requestMatchers("/api/comment/save").authenticated(); //
 
             // 차트 보는 거 로그인 허용할까 말까
-//            auth.requestMatchers("/api/sales/summary").permitAll();
+            auth.requestMatchers("/api/sales/summary").permitAll();
 
 
             // 공지사항 보는 거 로그인 안해도 가능

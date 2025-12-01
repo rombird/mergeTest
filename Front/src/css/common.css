@@ -104,10 +104,6 @@ body {
 }
 /* 로그인상태 : 유제네임, 마이페이지, 로그아웃 */
 .topNavli>.username-check{
-<<<<<<< HEAD
-    background-color: pink;
-=======
->>>>>>> 니혼진
     margin-right:20px;
     font-size:17px;
     font-family:'kopu';

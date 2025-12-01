@@ -20,13 +20,6 @@ class MyUploadAdapter{
                 const data = new FormData();
                 data.append('upload', file);
 
-<<<<<<< HEAD
-                // CKEditor 이미지 업로드는 토큰 재발급 로직이 불필요할 수 있어 axios를 유지하거나, 
-=======
-                // CKEditor 이미지 업로드는 토큰 재발급 로직이 불필요할 수 있어 axios를 유지하거나,
-                // api 인스턴스를 사용하려면 URL을 상대경로로 바꿔야 합니다. 
->>>>>>> 니혼진
-                // 여기서는 기존 코드를 유지하여 axios를 사용합니다.
                 return axios.post(this.url, data, {
                     headers: {
                         'Content-Type' : 'multipart/form-data'
@@ -223,7 +216,7 @@ const WriteBoard = () => {
 
         // 파일들을 formData에 추가
         uploadedFiles.forEach(file => {
-            formData.append("fileUpload", file); // fileUpload는 서버에서 파일 받을 때 쓰는 이름
+            formData.append("uploadFiles", file); // fileUpload는 서버에서 파일 받을 때 쓰는 이름
         });
 
         const url = isEditMode ? `/api/board/update/${id}` : '/api/board/writeBoard';
@@ -252,11 +245,9 @@ const WriteBoard = () => {
             
             if (response.status === 200 || response.status === 201) {
                 alert(isEditMode ? "게시글이 수정되었습니다." : "게시글이 작성되었습니다.");
-<<<<<<< HEAD
+
                 navigate(isEditMode ? `/board/${id}` : '/api/board/paging');  // 게시글 목록 페이지로 이동
-=======
-                navigate(isEditMode ? `/api/board/${id}` : '/api/board/paging');  // 게시글 목록 페이지로 이동
->>>>>>> 니혼진
+
             }
         } catch (error) {
             console.error("글 작성 실패:", error);
@@ -353,38 +344,38 @@ const WriteBoard = () => {
                                     <input
                                         className="file-upload-btn"
                                         type="file"
-                                        id="fileUpload"
-                                        name="fileUpload"
+                                        id="uploadFiles"
+                                        name="uploadFiles"
                                         multiple
                                         ref={fileInputRef}  // useRef 연결
                                         onChange={onFileInputChange} />
-                                    <label className="upload-btn" htmlFor="fileUpload">
+                                    <label className="upload-btn" htmlFor="uploadFiles">
                                         <i className="fa-solid fa-upload"></i>
                                     </label>
                                 </div>
 
                                 {/* 파일 업로드 영역 및 미리보기 */}
                                 <div className="upload" id="upload" ref={uploadAreaRef}>
-                                    {existingFiles.filter(f => !filesToDeleteIds.includes(f.boardFileId)).length === 0 && uploadedFiles.length === 0 ? (
+                                    {existingFiles.filter(f => !filesToDeleteIds.includes(f.id)).length === 0 && uploadedFiles.length === 0 ? (
                                         <p>파일을 드래그하여 첨부할 수 있습니다</p>
                                     ) : (
                                         <div className="preview-container">
-                                            {existingFiles.filter(f => !filesToDeleteIds.includes(f.boardFileId)).map((file, index) => (
+                                            {existingFiles.filter(f => !filesToDeleteIds.includes(f.id)).map((file, index) => (
                                                 // key는 React가 목록 요소를 식별하는 데 도움을 줍니다.
-                                                <React.Fragment key={file.boardFileId}>
+                                                <React.Fragment key={file.id}>
                                                     {/* 첫 번째 요소가 아닐 경우에만 점선 추가 */}
                                                     {index > 0 && (
                                                         <div className="line-dotted-preview"></div>
                                                     )}
                                                     <div className="preview-box">
                                                         <div>
-                                                            <div className="file-name">{file.boardFileNam}</div>
-                                                            <div className="file-size">{formatBytes(file.boardFileSize)}</div>
+                                                            <div className="file-name">{file.originalFilename}</div>
+                                                            <div className="file-size">{formatBytes(file. fileSize)}</div>
                                                         </div>
                                                         <button
                                                             className="delete-btn"
                                                             type="button"
-                                                            onClick={() => deleteFile(file.boardFileId)}
+                                                            onClick={() => deleteExistingFile(file.id)}
                                                         >
                                                             <i className="fa-solid fa-trash fa-lg"></i>
                                                         </button>
@@ -395,7 +386,7 @@ const WriteBoard = () => {
                                             {/* 2. 새로 업로드된 파일 목록 */}
                                             {uploadedFiles.map((file, index) => (
                                                 <React.Fragment key={file.name + file.size}>
-                                                    {(existingFiles.filter(f => !filesToDeleteIds.includes(f.boardFileId)).length > 0 || index > 0) && (
+                                                    {(existingFiles.filter(f => !filesToDeleteIds.includes(f.id)).length > 0 || index > 0) && (
                                                         <div className="line-dotted-preview"></div>
                                                     )}
                                                     <div className="preview-box">
@@ -432,7 +423,7 @@ const WriteBoard = () => {
                                         <div className="editor-container__editor">
                                             <CKEditor
                                                 editor={ClassicEditor}
-                                                data=""
+                                                data={boardContents}
                                                 config={editorConfig}
                                                 onChange={(event, editor) => {
                                                     const data = editor.getData();
