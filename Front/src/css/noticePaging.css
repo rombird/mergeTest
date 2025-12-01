@@ -106,9 +106,17 @@ td{
     height:50px;
     margin-left:300px;
 }
-.notice-bottom>.notice-btn{
-
+.notice-paging button{
+    border:none;
+    background: transparent;
 }
+.notice-bottom{
+    margin-bottom:100px;
+}
+.notice-btn{
+    margin-top:80px;
+}
+
 .notice-create{
     width:170px;
     height:50px;
@@ -119,4 +127,5 @@ td{
     border-radius: 4px;
     font-family: "kopu";
     border:none;
+    margin-bottom:100px;
 }

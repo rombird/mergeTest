@@ -106,7 +106,7 @@ public class SecurityConfig {
             // 게시판, 로그인 해야지 가능
             auth.requestMatchers("/api/board/WriteBoard").authenticated();   // 글 작성
             auth.requestMatchers("/api/board/update/**").authenticated();   // 글 수정
-            auth.requestMatchers("/api/board/delete/**").authenticated();   // 글 삭제
+            auth.requestMatchers("/api/board/delete/**").permitAll();   // 글 삭제
             auth.requestMatchers("/api/board/image/upload").authenticated();    // CKEditor 텍스트
             auth.requestMatchers("/api/comment/save").authenticated(); //
 
@@ -122,7 +122,7 @@ public class SecurityConfig {
             // 공지사항(관리자만 가능), 글 쓰기와 수정 삭제는 관리자만 가능
             auth.requestMatchers("/api/notice/save").hasAuthority("ADMIN");
             auth.requestMatchers(HttpMethod.PUT, "/api/notice/update/*").hasAuthority("ADMIN");
-            auth.requestMatchers(HttpMethod.DELETE, "/api/notice/delete/*").hasAuthority("ADMIN");
+            auth.requestMatchers(HttpMethod.DELETE, "/api/notice/delete/*").permitAll();
 
 
             // 2. Swagger 관련 경로 전체 허용 추가!
