@@ -2,10 +2,12 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useSyncExternalStore  } from 'react';
 import api from '../api/axiosConfig';
 import axios from 'axios'; 
+import { localeData } from 'moment';
 
 const AuthContext = createContext(null);
 
 export const useAuth = () => useContext(AuthContext);
+
 
 // 전역적인 인증상태 관리하는 파일
 export const AuthProvider = ({ children }) => {
@@ -46,6 +48,15 @@ export const AuthProvider = ({ children }) => {
     // 자동 로그인 체크
     useEffect(() => {
         const checkAuthStatus = async () => {
+            // 토큰 없으면 아무 API도 호출하지 않고 바로 로그아웃 상태로 처리
+            const token = localStorage.getItem("accessToken");
+            if(!token){
+                setIsLoading(false);
+                setUser(null);
+                setIsLoggedIn(false);
+                return;
+            }
+
             try {
                 await axios.get('http://localhost:8090/validate', { // axios를 사용하면 로그인 안된 상태(401)이라도 로그인 페이지로 튕기지 X
                     withCredentials:true
@@ -68,7 +79,7 @@ export const AuthProvider = ({ children }) => {
             }
         };
         checkAuthStatus();
-    }, []);
+    }, [fetchUserInfo]);
 
     // 로그인 성공 시
     const login = async () => {
@@ -86,6 +97,9 @@ export const AuthProvider = ({ children }) => {
         }
         
     };
+
+    
+    
 
     
     return (

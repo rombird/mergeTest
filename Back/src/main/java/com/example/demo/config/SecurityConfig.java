@@ -122,7 +122,7 @@ public class SecurityConfig {
             // 공지사항(관리자만 가능), 글 쓰기와 수정 삭제는 관리자만 가능
             auth.requestMatchers("/api/notice/save").hasAuthority("ADMIN");
             auth.requestMatchers(HttpMethod.PUT, "/api/notice/update/*").hasAuthority("ADMIN");
-            auth.requestMatchers(HttpMethod.DELETE, "/api/notice/delete/*").permitAll();
+            auth.requestMatchers(HttpMethod.DELETE, "/api/notice/delete/*").permitAll();    //
 
 
             // 2. Swagger 관련 경로 전체 허용 추가!
@@ -130,9 +130,7 @@ public class SecurityConfig {
                     "/v3/api-docs",                // v3/api-docs 경로 (JSON)
                     "/v3/api-docs/**",             // v3/api-docs 이하 모든 경로 (JSON)
                     "/swagger-ui.html",            // 기본 UI HTML 파일
-                    "/swagger-ui/**",               // Swagger UI 내부 리소스 (JS, CSS, Images)
-                    "/api/board/paging",         // 게시글 목록
-                    "/api/board/"
+                    "/swagger-ui/**"          // Swagger UI 내부 리소스 (JS, CSS, Images)
             ).permitAll();
 
             // 내가 주석처리함 user 경로를 이미 사용중이기 때문에
